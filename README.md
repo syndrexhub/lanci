@@ -1,4 +1,4 @@
-# Rizal AutoScriptSSH
+# Beta Script
 # Update dulu Bor
 
 <img src="https://img.shields.io/badge/Update%20Upgrade-green"> 
