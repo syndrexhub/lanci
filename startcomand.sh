@@ -133,8 +133,8 @@ echo "neofetch" >> .profile
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-curl https://${akbarvpn}/nginx.conf > /etc/nginx/nginx.conf
-curl https://${akbarvpn}/vps.conf > /etc/nginx/conf.d/vps.conf
+curl https://raw.githubusercontent.com/jagoanneon01/njajal/main/nginx.conf > /etc/nginx/nginx.conf
+curl https://raw.githubusercontent.com/jagoanneon01/njajal/main/vps.conf > /etc/nginx/conf.d/vps.conf
 sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/fpm/pool.d/www.conf
 useradd -m vps;
 mkdir -p /home/vps/public_html
@@ -173,7 +173,47 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 1153"/g' /etc/defa
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
+
+# Install SSLH
+apt -y install sslh
+rm -f /etc/default/sslh
+
+# Settings SSLH
+cat > /etc/default/sslh <<-END
+# Default options for sslh initscript
+# sourced by /etc/init.d/sslh
+
+# Disabled by default, to force yourself
+# to read the configuration:
+# - /usr/share/doc/sslh/README.Debian (quick start)
+# - /usr/share/doc/sslh/README, at "Configuration" section
+# - sslh(8) via "man sslh" for more configuration details.
+# Once configuration ready, you *must* set RUN to yes here
+# and try to start sslh (standalone mode only)
+
+RUN=yes
+
+# binary to use: forked (sslh) or single-thread (sslh-select) version
+# systemd users: don't forget to modify /lib/systemd/system/sslh.service
+DAEMON=/usr/sbin/sslh
+
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:2443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
+
+END
+
+# Restart Service SSLH
+service sslh restart
+systemctl restart sslh
+/etc/init.d/sslh restart
+/etc/init.d/sslh status
+/etc/init.d/sslh restart
+
+# install squid
 cd
+apt -y install squid3
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/jagoanneon01/njajal/main/squid3.conf"
+sed -i $MYIP2 /etc/squid/squid.conf
+
 # setting vnstat
 apt -y install vnstat
 /etc/init.d/vnstat restart
@@ -190,6 +230,52 @@ systemctl enable vnstat
 /etc/init.d/vnstat restart
 rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
+
+# install webmin
+apt install webmin -y
+sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
+/etc/init.d/webmin restart
+
+# install stunnel
+apt install stunnel4 -y
+cat > /etc/stunnel/stunnel.conf <<-END
+cert = /etc/stunnel/stunnel.pem
+client = no
+socket = a:SO_REUSEADDR=1
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+
+[dropbear]
+accept = 445
+connect = 127.0.0.1:109
+
+[openssh]
+accept = 777
+connect = 127.0.0.1:2443
+
+[openvpn]
+accept = 990
+connect = 127.0.0.1:1194
+
+
+END
+
+# make a certificate
+openssl genrsa -out key.pem 2048
+openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
+-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
+cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
+
+# konfigurasi stunnel
+sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
+/etc/init.d/stunnel4 restart
+
+#OpenVPN
+wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/vpn.sh && chmod +x vpn.sh && ./vpn.sh
+
+# Ganti Banner
+wget -O /etc/issue.net "https://raw.githubusercontent.com/jagoanneon01/njajal/main/issue.net"
+
 # install fail2ban
 apt -y install fail2ban
 
@@ -201,6 +287,11 @@ else
 	mkdir /usr/local/ddos
 fi
 clear
+
+# banner /etc/issue.net
+echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
+sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
+
 # blockir torrent
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
 iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
@@ -225,13 +316,25 @@ wget -O newhost "https://raw.githubusercontent.com/jagoanneon01/njajal/main/newh
 wget -O about "https://raw.githubusercontent.com/jagoanneon01/njajal/main/about.sh"
 wget -O info "https://raw.githubusercontent.com/jagoanneon01/njajal/main/info.sh"
 wget -O wbmn "https://raw.githubusercontent.com/jagoanneon01/njajal/main/webmin.sh"
-wget -O menu "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/menu.sh"
+wget -O menu "https://raw.githubusercontent.com/jagoanneon01/njajal/main/menu.sh"
+wget -O addssh "https://raw.githubusercontent.com/jagoanneon01/njajal/main/addssh.sh"
+wget -O delssh "https://raw.githubusercontent.com/jagoanneon01/njajal/main/delssh.sh"
+wget -O member "https://raw.githubusercontent.com/jagoanneon01/njajal/main/member.sh"
+wget -O delexp "https://raw.githubusercontent.com/jagoanneon01/njajal/main/delexp.sh"
+wget -O cekssh "https://raw.githubusercontent.com/jagoanneon01/njajal/main/cekssh.sh"
+wget -O renewssh "https://raw.githubusercontent.com/jagoanneon01/njajal/main/renewssh.sh"
+wget -O trial "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial.sh"
+wget -O trial-ssh "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-ssh.sh"
 wget -O trial-vmess "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-vmess.sh"
 wget -O trial-vless "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-vless.sh"
 wget -O trial-trojan "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-trojan.sh"
 wget -O trial-trojango "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-trojango.sh"
 wget -O trial-grpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-grpc.sh"
 wget -O speedtest "https://raw.githubusercontent.com/jagoanneon01/njajal/main/speedtest_cli.py"
+wget -O restart "https://raw.githubusercontent.com/jagoanneon01/njajal/main/restart.sh"
+wget -O autokill "https://raw.githubusercontent.com/jagoanneon01/njajal/main/autokill.sh"
+wget -O ceklim "https://raw.githubusercontent.com/jagoanneon01/njajal/main/ceklim.sh"
+wget -O tendang "https://raw.githubusercontent.com/jagoanneon01/njajal/main/tendang.sh"
 wget -O clearlog "https://raw.githubusercontent.com/jagoanneon01/njajal/main/clearlog.sh"
 wget -O xp "https://raw.githubusercontent.com/jagoanneon01/njajal/main/xp.sh"
 wget -O addvmess "https://raw.githubusercontent.com/jagoanneon01/njajal/main/xray/addv2ray.sh"
@@ -252,11 +355,28 @@ wget -O deltrgo "https://raw.githubusercontent.com/jagoanneon01/njajal/main/troj
 wget -O renewtrgo "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/renewtrgo.sh"
 wget -O cektrgo "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/cektrgo.sh"
 wget -O running "https://raw.githubusercontent.com/jagoanneon01/njajal/main/running.sh"
+wget -O sslh-fix "https://raw.githubusercontent.com/jagoanneon01/njajal/main/sslh/sslh-fix"
 
 chmod +x addhost
 chmod +x newhost
 chmod +x menu
 sed -i -e 's/\r$//' menu
+chmod +x member
+sed -i -e 's/\r$//' member
+chmod +x delxp
+sed -i -e 's/\r$//' delxp
+chmod +x addssh
+sed -i -e 's/\r$//' addssh
+chmod +x delssh
+sed -i -e 's/\r$//' delssh
+chmod +x cekssh
+sed -i -e 's/\r$//' cekssh
+chmod +x renewssh
+sed -i -e 's/\r$//' renewssh
+chmod +x trial
+sed -i -e 's/\r$//' trial
+chmod +x trial-ssh
+sed -i -e 's/\r$//' trial-ssh
 chmod +x trial-vmess
 sed -i -e 's/\r$//' trial-vmess
 chmod +x trial-vless
@@ -270,6 +390,10 @@ sed -i -e 's/\r$//' trial-grpcc
 chmod +x speedtest
 chmod +x info
 chmod +x about
+chmod +x autokill
+chmod +x tendang
+chmod +x ceklim
+chmod +x restart
 chmod +x clearlog
 chmod +x wbmn
 chmod +x xp
@@ -307,6 +431,8 @@ chmod +x renewtrgo
 sed -i -e 's/\r$//' renewtrgo
 chmod +x cektrgo
 sed -i -e 's/\r$//' cektrgo
+chmod +x sslh-fix
+sed -i -e 's/\r$//' sslh-fix
 
 echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
 echo "0 0 * * * root xp" >> /etc/crontab
@@ -326,16 +452,21 @@ apt-get -y --purge remove apache2*;
 apt-get -y --purge remove bind9*;
 apt-get -y remove sendmail*
 apt autoremove -y
+
 # finishing
 cd
 chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/nginx restart
+/etc/init.d/openvpn restart
 /etc/init.d/cron restart
 /etc/init.d/ssh restart
 /etc/init.d/dropbear restart
 /etc/init.d/fail2ban restart
+/etc/init.d/sslh restart
+/etc/init.d/stunnel5 restart
 /etc/init.d/vnstat restart
 /etc/init.d/fail2ban restart
+/etc/init.d/squid restart
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
@@ -343,7 +474,9 @@ history -c
 echo "unset HISTFILE" >> /etc/profile
 
 cd
+rm -f /root/key.pem
+rm -f /root/cert.pem
+rm -f /root/ssh-vpn.sh
 
-# finishing
+# finihsing
 clear
-
