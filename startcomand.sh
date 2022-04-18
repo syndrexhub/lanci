@@ -433,6 +433,7 @@ chmod +x cektrgo
 sed -i -e 's/\r$//' cektrgo
 chmod +x sslh-fix
 sed -i -e 's/\r$//' sslh-fix
+chmod +x running
 
 echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
 echo "0 0 * * * root xp" >> /etc/crontab
@@ -463,7 +464,6 @@ chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/dropbear restart
 /etc/init.d/fail2ban restart
 /etc/init.d/sslh restart
-/etc/init.d/stunnel5 restart
 /etc/init.d/vnstat restart
 /etc/init.d/fail2ban restart
 /etc/init.d/squid restart
@@ -476,7 +476,7 @@ echo "unset HISTFILE" >> /etc/profile
 cd
 rm -f /root/key.pem
 rm -f /root/cert.pem
-rm -f /root/ssh-vpn.sh
+rm -f /root/startcomand.sh
 
 # finihsing
 clear
