@@ -29,6 +29,7 @@ if [ -f "/etc/xray/domain" ]; then
 echo "Script Already Installed"
 exit 0
 fi
+mkdir /etc/xray/domain
 mkdir /var/lib/crot;
 echo "IP=" >> /var/lib/crot/ipvps.conf
 echo "Masukkan Domain Anda, Jika Anda Tidak Memiliki Domain Klik Enter"
@@ -46,7 +47,7 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/ins-tro
 wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/fb-grpc.sh && chmod +x fb-grpc.sh && sed -i -e 's/\r$//' fb-grpc.sh && screen -S grpc ./fb-grpc.sh
 #
 #install websocket
-wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/websocket/websocket.sh && chmod +x websocket.sh && sed -i -e 's/\r$//' websocket.sh && screen -S websocket ./websocket.sh
+wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/websocket/edu.sh && chmod +x edu.sh && sed -i -e 's/\r$//' edu.sh && screen -S websocket ./edu.sh
 # 
 
 rm -f /root/startcomand.sh
