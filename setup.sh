@@ -45,11 +45,15 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/ins-tro
 # install xray grpc
 wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/fb-grpc.sh && chmod +x fb-grpc.sh && sed -i -e 's/\r$//' fb-grpc.sh && screen -S grpc ./fb-grpc.sh
 #
+#install websocket
+wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/websocket/websocket.sh && chmod +x websocket.sh && sed -i -e 's/\r$//' websocket.sh && screen -S websocket ./websocket.sh
+# 
 
 rm -f /root/startcomand.sh
 rm -f /root/ins-xray.sh
 rm -f /root/ins-trojango.sh
 rm -f /root/fb-grpc.sh
+rm -f /root/websocket.sh
 history -c
 echo "1.2" > /home/ver
 echo " "
