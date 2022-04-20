@@ -243,85 +243,7 @@ cat > /etc/xray/config.json << END
         ]
       }
     },
-    {
-      "port": 8443,
-      "protocol": "trojan",
-      "settings": {
-        "clients": [
-          {
-            "id": "${uuid}"
-#xray-trojan-wstls
-          }
-        ],
-        "decryption": "none"
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "${path_crt}",
-              "keyFile": "${path_key}"
-            }
-          ]
-        },
-        "tcpSettings": {},
-        "kcpSettings": {},
-        "httpSettings": {},
-        "wsSettings": {
-          "path": "/Ronggolawe",
-          "headers": {
-            "Host": ""
-          }
-        },
-        "quicSettings": {}
-      },
-      "domain": "$domain",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
-    {
-      "port": 8880,
-      "protocol": "trojan",
-      "settings": {
-        "clients": [
-          {
-            "id": "${uuid8}"
-#xray-trojan-wsnone
-          }
-        ],
-        "decryption": "none"
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "tlsSettings": {},
-        "tcpSettings": {},
-        "kcpSettings": {},
-        "httpSettings": {},
-        "wsSettings": {
-          "path": "/Ronggolawe",
-          "headers": {
-            "Host": ""
-          }
-        },
-        "quicSettings": {}
-      },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
-    {
+    {     
       "port": 2083,
       "protocol": "trojan",
       "settings": {
@@ -459,10 +381,6 @@ iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 443 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 80 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8443 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8443 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2083 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2083 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
