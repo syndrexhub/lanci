@@ -112,7 +112,7 @@ cat > /etc/trojan-go/config.json << END
 END
 
 #Buat Config Trojan-Websocket
-cat > /etc/trojan-go/config.json << END
+cat > /etc/trojan-go/wstls.json << END
 {
   "run_type": "server",
   "local_addr": "0.0.0.0",
@@ -177,7 +177,7 @@ cat > /etc/trojan-go/config.json << END
 END
 
 #Buat Config trojan-nontls
-cat > /etc/trojan-go/config.json << END
+cat > /etc/trojan-go/nontls.json << END
 {
   "run_type": "server",
   "local_addr": "0.0.0.0",
@@ -261,6 +261,46 @@ RestartPreventExitStatus=23
 WantedBy=multi-user.target
 END
 
+# Installing Trojan wstls
+cat > /etc/systemd/system/trojan-wstls.service << END
+[Unit]
+Description=Trojan-Go Service By JAGOANNEON
+Documentation=nekopoi.care
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/trojan-go -config /etc/trojan-go/wstls.json
+Restart=on-failure
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+END
+
+# Installing Trojan wsnone
+cat > /etc/systemd/system/trojan-nonetls.service << END
+[Unit]
+Description=Trojan-Go Service By JAGOANNEON
+Documentation=nekopoi.care
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/trojan-go -config /etc/trojan-go/nontls.json
+Restart=on-failure
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+END
+
 # Trojan Go Uuid
 cat > /etc/trojan-go/uuid.txt << END
 $uuid
@@ -282,3 +322,11 @@ systemctl stop trojan-go
 systemctl start trojan-go
 systemctl enable trojan-go
 systemctl restart trojan-go
+systemctl stop trojan-wstls
+systemctl start trojan-wstls
+systemctl enable trojan-wstls
+systemctl restart trojan-wstls
+systemctl stop trojan-nonetls
+systemctl start trojan-nonetls
+systemctl enable trojan-nonetls
+systemctl restart trojan-nonetls
