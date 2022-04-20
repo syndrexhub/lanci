@@ -85,7 +85,7 @@ echo -e "═══════════════════════�
 echo -e "GET ${domain}://bug.com/ HTTP/1.1[crlf]Host: ${domain}[crlf]Connection: Keep-Alive[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf]" | lolcat
 echo -e "════════════════════════" | lolcat
 echo -e "Created        : $now" | lolcat
-echo -e "Expired On     : $exp Hours" | lolcat
+echo -e "Expired On     : jam $ktf" | lolcat
 echo -e "════════════════════════" | lolcat
 echo -e "AutoScript By JAGOANNEON" | lolcat
 echo -e "════════════════════════" | lolcat
