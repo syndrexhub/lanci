@@ -31,7 +31,7 @@ commonname=www.jagoanneon-premium.me
 email=admin@jagoanneon-premium.me
 
 # simple password minimal
-wget -O /etc/pam.d/common-password "https://${akbarvpn}/password"
+wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/jagoanneon01/njajal/main/password"
 chmod +x /etc/pam.d/common-password
 
 # go to root
