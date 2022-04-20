@@ -265,7 +265,7 @@ END
 cat > /etc/systemd/system/trojan-wstls.service << END
 [Unit]
 Description=Trojan-Go Service By JAGOANNEON
-Documentation=nekopoi.care
+Documentation=github.com/p4gefau1t
 After=network.target nss-lookup.target
 
 [Service]
@@ -285,7 +285,7 @@ END
 cat > /etc/systemd/system/trojan-nonetls.service << END
 [Unit]
 Description=Trojan-Go Service By JAGOANNEON
-Documentation=nekopoi.care
+Documentation=github.com/jagoanneon01
 After=network.target nss-lookup.target
 
 [Service]
