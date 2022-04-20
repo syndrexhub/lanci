@@ -48,17 +48,9 @@ hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#xray-trojan$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#xray-trojan-wsnone$/a\#### '"$user $exp"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#xray-trojan-wstls$/a\#### '"$user $exp"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 systemctl restart xray.service
 trojanlink="trojan://${user}@${domain}:${tr}/${bug}"
 trojanlinkk="trojan://${user}@${MYIP}:${tr}/${bug}"
-trojanwstls="trojan://${uuid}@${domain}:8443?path=/Ronggolawe&security=tls&encryption=none&type=ws#${user}"
-trojanwsnone="trojan://${uuid}@${domain}:80?path=/Ronggolawe&encryption=none&type=ws#${user}"
-trojanwss="trojan://${user}@${domain}:$80/?sni=none&type=ws&host=${domain}&path=/Ronggolawe&encryption=none"
-trojanwsss="trojan://${user}@${domain}:$8443/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&security=tls&encryption=none"
 service cron restart
 clear
 echo -e ""
@@ -77,15 +69,6 @@ echo -e "════════════════" | lolcat
 echo -e "Link TR  : ${trojanlink}"
 echo -e "════════════════" | lolcat
 echo -e "Link TR IP  : ${trojanlinkk}"
-echo -e "════════════════" | lolcat
-echo -e "Link TR wss : "
-echo -e " ${trojanwstls}"
-echo -e "════════" | lolcat
-echo -e " ${trojanwsnone}"
-echo -e "════════" | lolcat
-echo -e " ${trojanwss}"
-echo -e "════════" | lolcat
-echo -e " ${trojanwsss}"
 echo -e "════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
 echo -e "════════════════" | lolcat
