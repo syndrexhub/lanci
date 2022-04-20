@@ -67,7 +67,7 @@ echo -e "Path       : /trojango"
 echo -e "Created    : $hariini"
 echo -e "Expired    : $exp"
 echo -e "════════════════" | lolcat
-echo -e "Link Trojan-Go  : 
+echo -e "Link Trojan-Go  : "
 echo -e ""
 echo -e " ${link}"
 echo -e "════════════════" | lolcat
