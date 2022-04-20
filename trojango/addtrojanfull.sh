@@ -61,7 +61,9 @@ echo -e "════════════════" | lolcat
 echo -e "Remarks    : ${user}"
 echo -e "IP/Host    : ${MYIP}"
 echo -e "Address    : ${domain}"
-echo -e "Port       : ${trgo}"
+echo -e "Port trgo  : ${trgo}"
+echo -e "Port wstls : 8443"
+echo -e "Port wsnone: 8880"
 echo -e "Key        : ${user}"
 echo -e "Encryption : none"
 echo -e "Bug.       : ${bug}
