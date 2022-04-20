@@ -51,12 +51,12 @@ hariini=`date -d "0 days" +"%Y-%m-%d"`
 echo -e "### $user $exp" >> /etc/trojan-go/akun.conf
 systemctl restart trojan-go.service
 link="trojan-go://${user}@${bug}:${trgo}/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
-link1="trojan://${user}@${bug}:${trgo}/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
-link2="trojan://${user}@${bug}:${trgo}/?sni=&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link1="trojan://${user}@${bug}:8443/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link2="trojan://${user}@${bug}:8880/?sni=&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
 clear
 echo -e ""
 echo -e "════════════════" | lolcat
-echo -e "${RED}=====-TROJAN-GO-====${NC}"
+echo -e "${RED}=====-TROJAN-Websocket-====${NC}"
 echo -e "════════════════" | lolcat
 echo -e "Remarks    : ${user}"
 echo -e "IP/Host    : ${MYIP}"
@@ -65,7 +65,7 @@ echo -e "Port       : ${trgo}"
 echo -e "Key        : ${user}"
 echo -e "Encryption : none"
 echo -e "Bug.       : ${bug}
-echo -e "Path       : /trojango"
+echo -e "Path       : /Ronggolawe"
 echo -e "Created    : $hariini"
 echo -e "Expired    : $exp"
 echo -e "════════════════" | lolcat
