@@ -351,6 +351,7 @@ wget -O renewvless "https://raw.githubusercontent.com/jagoanneon01/njajal/main/x
 wget -O renewtrojan "https://raw.githubusercontent.com/jagoanneon01/njajal/main/xray/renewtrojan.sh"
 wget -O certv2ray "https://raw.githubusercontent.com/jagoanneon01/njajal/main/xray/certv2ray.sh"
 wget -O addtrgo "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/addtrgo.sh"
+wget -O addtrojanws "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/addtrojanfull.sh"
 wget -O deltrgo "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/deltrgo.sh"
 wget -O renewtrgo "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/renewtrgo.sh"
 wget -O cektrgo "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/cektrgo.sh"
@@ -425,6 +426,8 @@ chmod +x certv2ray
 sed -i -e 's/\r$//' certv2ray
 chmod +x addtrgo
 sed -i -e 's/\r$//' addtrgo
+chmod +x addtrojanws
+sed -i -e 's/\r$//' addtrojanws
 chmod +x deltrgo
 sed -i -e 's/\r$//' deltrgo
 chmod +x renewtrgo
