@@ -363,8 +363,8 @@ chmod +x menu
 sed -i -e 's/\r$//' menu
 chmod +x member
 sed -i -e 's/\r$//' member
-chmod +x delxp
-sed -i -e 's/\r$//' delxp
+chmod +x delexp
+sed -i -e 's/\r$//' delexp
 chmod +x addssh
 sed -i -e 's/\r$//' addssh
 chmod +x delssh
