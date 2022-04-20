@@ -7,7 +7,7 @@ echo -e ""
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━ Menu ━━━━━━━━━━━━━━━━━━━━" | lolcat
 echo -e "* menu              : Menampilkan Daftar Perintah"
 echo -e "* Attention         : Silahkan Ketik Perintah Sesuai Dengan List Di Menu"
-echo -e "* Sekarang          : $WKT " | lolcat
+echo -e "* Lokasimu          : $WKT " | lolcat
 echo -e ""
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━ TRIAL-VPN ━━━━━━━━━━━━━━━━━━" | lolcat
 echo -e "* trial-ssh         : Membuat Trial Akun SSH"
