@@ -61,7 +61,10 @@ echo -e "Dropbear            : 2443, 109, 143" | lolcat
 echo -e "SSL/TLS             :$ssl" | lolcat
 echo -e "Proxy Squid         :$sqd" | lolcat
 echo -e "═══════════════════════" | lolcat
+echo -e "SSH Websocket Http  : $ws" | lolcat
+echo -e "SSH Websocket TLS   : $ws2" | lolcat
 echo -e "OVPN Websocket      : 2086" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "OVPN Port TCP       : $ovpn" | lolcat
 echo -e "OVPN Port UDP       : $ovpn2" | lolcat
 echo -e "OVPN Port SSL       : 990" | lolcat
