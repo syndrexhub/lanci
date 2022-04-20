@@ -54,7 +54,7 @@ cat > /etc/xray/fb-vmessgrpc.json << END
     },
     "inbounds": [
         {
-            "port": 2086,
+            "port": 2080,
             "protocol": "vmess",
             "settings": {
                 "clients": [
@@ -304,8 +304,8 @@ RestartPreventExitStatus=23
 WantedBy=multi-user.target
 EOF
 
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2086 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2086 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2080 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2080 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2096 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2096 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
