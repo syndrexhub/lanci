@@ -45,7 +45,7 @@ wget -q -O /usr/local/bin/geosite.dat "https://raw.githubusercontent.com/jagoann
 wget -q -O /usr/local/bin/geoip.dat "https://raw.githubusercontent.com/jagoanneon01/Rizal/main/grpc/geoip.dat"
 
 #
-cat > /etc/xray/fb-vmessgrpc.json << END
+cat > /etc/xray/vmessgrpc.json << END
 {
     "log": {
             "access": "/var/log/xray/access5.log",
@@ -54,7 +54,7 @@ cat > /etc/xray/fb-vmessgrpc.json << END
     },
     "inbounds": [
         {
-            "port": 2080,
+            "port": 8443,
             "protocol": "vmess",
             "settings": {
                 "clients": [
@@ -158,7 +158,7 @@ cat > /etc/xray/fb-vmessgrpc.json << END
 }
 END
 
-cat > /etc/xray/fb-vlessgrpc.json << END
+cat > /etc/xray/vlessgrpc.json << END
 {
     "log": {
             "access": "/var/log/xray/access5.log",
@@ -167,7 +167,7 @@ cat > /etc/xray/fb-vlessgrpc.json << END
     },
     "inbounds": [
         {
-            "port": 2096,
+            "port": 8880,
             "protocol": "vless",
             "settings": {
                 "clients": [
@@ -272,7 +272,7 @@ cat > /etc/xray/fb-vlessgrpc.json << END
 END
 
 
-cat > /etc/systemd/system/fb-vmess-grpc.service << EOF
+cat > /etc/systemd/system/vmess-grpc.service << EOF
 [Unit]
 Description=XRay VMess GRPC Service
 Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
@@ -281,14 +281,14 @@ After=network.target nss-lookup.target
 [Service]
 User=root
 NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray -config /etc/xray/fb-vmessgrpc.json
+ExecStart=/usr/local/bin/xray -config /etc/xray/vmessgrpc.json
 RestartPreventExitStatus=23
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-cat > /etc/systemd/system/fb-vless-grpc.service << EOF
+cat > /etc/systemd/system/vless-grpc.service << EOF
 [Unit]
 Description=XRay VMess GRPC Service
 Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
@@ -297,38 +297,38 @@ After=network.target nss-lookup.target
 [Service]
 User=root
 NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray -config /etc/xray/fb-vlessgrpc.json
+ExecStart=/usr/local/bin/xray -config /etc/xray/vlessgrpc.json
 RestartPreventExitStatus=23
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2080 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2080 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2096 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2096 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 systemctl daemon-reload
-systemctl enable fb-vmess-grpc
-systemctl restart fb-vmess-grpc
-systemctl enable fb-vless-grpc
-systemctl restart fb-vless-grpc
+systemctl enable vmess-grpc
+systemctl restart vmess-grpc
+systemctl enable vless-grpc
+systemctl restart vless-grpc
 #
 cd /usr/bin
 
 
-wget -O fb-addgrpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/fb-addgrpc.sh"
-wget -O fb-delgrpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/fb-delgrpc.sh"
-wget -O fb-renewgrpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/fb-renewgrpc.sh"
-wget -O fb-cekgrpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/fb-cekgrpc.sh"
+wget -O addgrpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/addgrpc.sh"
+wget -O delgrpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/delgrpc.sh"
+wget -O renewgrpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/renewgrpc.sh"
+wget -O cekgrpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/cekgrpc.sh"
 
-chmod +x fb-addgrpc
-chmod +x fb-delgrpc
-chmod +x fb-renewgrpc
-chmod +x fb-cekgrpc
+chmod +x addgrpc
+chmod +x delgrpc
+chmod +x renewgrpc
+chmod +x cekgrpc
 
-rm -f fb-grpc.sh
+rm -f grpc.sh
