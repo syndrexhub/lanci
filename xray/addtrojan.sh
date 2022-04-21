@@ -46,29 +46,45 @@ until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
 read -p "Expired (Days) : " masaaktif
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+sed -i '/#xray-trojan-wstls$/a\#&# '"$user $exp"'\
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#xray-trojan-wsnone$/a\#&# '"$user $exp"'\
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#xray-trojan$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
 systemctl restart xray.service
 trojanlink="trojan://${user}@${domain}:${tr}/${bug}"
 trojanlinkk="trojan://${user}@${MYIP}:${tr}/${bug}"
+link="trojan://${user}@${bug}:${2053}/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link2="trojan://${user}@${bug}:${2080}/?sni=none&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
 service cron restart
 clear
 echo -e ""
 echo -e "════════════════" | lolcat
 echo -e "=•=•-XRAYS/TROJAN-=•=•"
 echo -e "════════════════" | lolcat
-echo -e "Remarks  : ${user}"
-echo -e "IP/Host  : ${MYIP}"
-echo -e "Address  : ${domain}"
-echo -e "Port     : ${tr}"
-echo -e "Key      : ${user}"
-echo -e "Bug     : ${bug}
-echo -e "Created  : $hariini"
-echo -e "Expired  : $exp"
+echo -e "Remarks    : ${user}"
+echo -e "IP/Host    : ${MYIP}"
+echo -e "Address    : ${domain}"
+echo -e "Port TCP   : ${tr}"
+echo -e "Port WSTLS : 2053"
+echo -e "Port WSNONE: 2080"
+echo -e "Key        : ${user}"
+echo -e "Bug        : ${bug}"
+echo -e "Created    : $hariini"
+echo -e "Expired    : $exp"
 echo -e "════════════════" | lolcat
-echo -e "Link TR  : ${trojanlink}"
+echo -e "Link TR  : "
+echo -e ">>>> ${trojanlink}"
 echo -e "════════════════" | lolcat
-echo -e "Link TR IP  : ${trojanlinkk}"
+echo -e "Link TR IP  : "
+echo -e ">>>> ${trojanlinkk}"
+echo -e "════════════════" | lolcat
+echo -e "Link TR WSTLS  : "
+echo -e ">>>> ${link}"
+echo -e "════════════════" | lolcat
+echo -e "Link TR WSNONE  : "
+echo -e ">>>> ${link2}"
 echo -e "════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
 echo -e "════════════════" | lolcat
