@@ -254,7 +254,11 @@ cat > /etc/xray/config.json << END
 #xray-trojan-wstls
           }
         ],
-        "decryption": "none"
+        "fallbacks": [
+          {
+            "dest": 80
+          }
+        ]
       },
       "streamSettings": {
         "network": "ws",
@@ -297,7 +301,11 @@ cat > /etc/xray/config.json << END
 #xray-trojan-wsnone
           }
         ],
-        "decryption": "none"
+        "fallbacks": [
+          {
+            "dest": 80
+          }
+        ]
       },
       "streamSettings": {
         "network": "ws",
@@ -438,7 +446,7 @@ END
 cat > /etc/systemd/system/xray.service << END
 [Unit]
 Description=Xray Service By JAGOANNEON
-Documentation=https://nekopoi.care
+Documentation=http://jagoanneon-premium.xyz
 After=network.target nss-lookup.target
 
 [Service]
