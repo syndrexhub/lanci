@@ -29,7 +29,7 @@ if [ -f "/etc/xray/domain" ]; then
 echo "Script Already Installed"
 exit 0
 fi
-mkdir /etc/xray/domain
+mkdir /etc/xray
 mkdir /var/lib/crot;
 echo "IP=" >> /var/lib/crot/ipvps.conf
 echo "Masukkan Domain Anda, Jika Anda Tidak Memiliki Domain Klik Enter"
