@@ -81,7 +81,7 @@ echo "   - XRAYS VLESS GRPC        : 8880"  | tee -a log-install.txt
 echo "   - CloudFront Websocket    : "  | tee -a log-install.txt
 echo "   - Websocket TLS           : 2443"  | tee -a log-install.txt
 echo "   - Websocket None TLS      : 2082"  | tee -a log-install.txt
-echo "   - Websocket Ovpn          : 2096"  | tee -a log-install.txt
+echo "   - Websocket Ovpn          : 2086"  | tee -a log-install.txt
 echo "   - TrojanGo                : 2087"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
