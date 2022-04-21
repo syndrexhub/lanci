@@ -262,42 +262,26 @@ cat > /etc/xray/config.json << END
       },
       "streamSettings": {
         "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "${path_crt}",
-              "keyFile": "${path_key}"
-            }
-          ],
-          "alpn": [
-            "http/1.1"
-          ]
-        },
+        "security": "none",
+        "tlsSettings": {},
         "tcpSettings": {},
         "kcpSettings": {},
+        "httpSettings": {},
         "wsSettings": {
           "path": "/Ronggolawe",
           "headers": {
             "Host": ""
-        "httpSettings": {},
-        "quicSettings": {},
-        "grpcSettings": {}
+          }
+        },
+        "quicSettings": {}
       },
-      "domain": "$domain"
-     }
-  ],
-  "outbounds": [
-    {
-      "protocol": "freedom",
-      "settings": {}
-    },
-    {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "blocked"
-    }
-  ],  
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
     },
     {
       "port": 2080,
@@ -314,47 +298,7 @@ cat > /etc/xray/config.json << END
             "dest": 80
           }
         ]
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "${path_crt}",
-              "keyFile": "${path_key}"
-            }
-          ],
-          "alpn": [
-            "http/1.1"
-          ]
-        },
-        "tcpSettings": {},
-        "kcpSettings": {},
-        "wsSettings": {
-          "path": "/Ronggolawe",
-          "headers": {
-            "Host": ""
-        "httpSettings": {},
-        "quicSettings": {},
-        "grpcSettings": {}
-      },
-      "domain": "$domain"
-     }
-  ],
-  "outbounds": [
-    {
-      "protocol": "freedom",
-      "settings": {}
-    },
-    {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "blocked"
-    }
-  ],
-    },
-    {     
+      },     
       "port": 2083,
       "protocol": "trojan",
       "settings": {
