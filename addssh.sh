@@ -81,7 +81,7 @@ echo -e "GET / HTTP/1.1[crlf]Host: ${domain}[crlf]Connection: Keep-Alive[crlf]Us
 echo -e "═══════════════════════" | lolcat
 echo -e "PAYLOAD WS SSL" | lolcat
 echo -e "═══════════════════════" | lolcat
-echo -e "GET wss://${bug}/ HTTP/1.1[crlf]Host: ${domain}[crlf]Connection: Keep-Alive[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf]" | lolcat
+echo -e "GET ${domain}:// ${bug}/ HTTP/1.1[crlf]Host: ${domain}[crlf]Connection: Keep-Alive[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf]" | lolcat
 echo -e "═══════════════════════" | lolcat
 echo -e "Created             : $hariini" | lolcat
 echo -e "Expired             : $expi" | lolcat
