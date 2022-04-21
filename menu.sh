@@ -3,6 +3,7 @@ WKT=$(curl -s ipinfo.io/timezone )
 clear
 echo -e " SEDANG PROSES OM HARAP BERSABAR"
 sleep 2
+figlet -f small JAGOANNEON AUTOSCRIPTSSH | lolcat
 echo -e ""
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━ Menu ━━━━━━━━━━━━━━━━━━━━" | lolcat
 echo -e "* menu              : Menampilkan Daftar Perintah" | lolcat
