@@ -82,16 +82,33 @@ cat>/etc/xray/vmess-$user-nontls.json<<EOF
       "tls": "none"
 }
 EOF
+cat > /etc/xray/$user-tls.json << EOF
+      {
+      "v": "2",
+      "ps": "${user}",
+      "add": "${domain}",
+      "port": "${tls}",
+      "id": "${uuid}",
+      "aid": "0",
+      "net": "grpc",
+      "path": "GunService",
+      "type": "none",
+      "host": "${bug}",
+      "tls": "tls"
+}
+EOF
 vmess_base641=$( base64 -w 0 <<< $vmess_json1)
 vmess_base642=$( base64 -w 0 <<< $vmess_json2)
+vmess_base642=$( base64 -w 0 <<< $vmess_json3)
 xrayv2ray1="vmess://$(base64 -w 0 /etc/xray/vmess-$user-tls.json)"
 xrayv2ray2="vmess://$(base64 -w 0 /etc/xray/vmess-$user-nontls.json)"
+xrayv2ray3="vmess://$(base64 -w 0 /etc/xray/$user-tls.json)"
 systemctl restart xray.service
 service cron restart
 clear
 echo -e ""
 echo -e "════════════════" | lolcat
-echo -e "${RED}====-XRAYS/VMESS-====${NC}"
+echo -e "${RED}====-VMESS-====${NC}"
 echo -e "════════════════" | lolcat
 echo -e "Remarks     : ${user}"
 echo -e "IP/Host     : ${MYIP}"
@@ -101,7 +118,7 @@ echo -e "Port No TLS : ${nontls}"
 echo -e "User ID     : ${uuid}"
 echo -e "Alter ID    : 0"
 echo -e "Security    : auto"
-echo -e "Network     : ws"
+echo -e "Network     : WS & Grpc"
 echo -e "Bug         : ${bug}
 echo -e "Path        : /Ronggolawe"
 echo -e "Created     : $hariini"
@@ -114,6 +131,10 @@ echo -e "════════════════" | lolcat
 echo -e "Link Non TLS : 
 echo -e ""
 echo -e " ${xrayv2ray2}"
+echo -e "════════════════" | lolcat
+echo -e "Link GRPC : 
+echo -e ""
+echo -e " ${xrayv2ray3}"
 echo -e "════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
 echo -e "════════════════" | lolcat
