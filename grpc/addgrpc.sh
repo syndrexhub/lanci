@@ -23,6 +23,7 @@ clear
 MYIP=$(curl -sS ipv4.icanhazip.com)
 clear
 domain=$(cat /etc/xray/domain)
+read -rp "Masukkan Bug: " -e bug
 tls=$(cat /etc/xray/vmessgrpc.json | grep port | awk '{print $2}' | sed 's/,//g')
 vl=$(cat /etc/xray/vlessgrpc.json | grep port | awk '{print $2}' | sed 's/,//g')
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
@@ -35,8 +36,9 @@ until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 			exit 1
 		fi
 	done
-read -rp "Masukkan Bug: " -e bug
 uuid=$(cat /proc/sys/kernel/random/uuid)
+read -p "Expired (Days) : " masaaktif
+hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/vmessgrpc.json
