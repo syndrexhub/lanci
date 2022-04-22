@@ -80,7 +80,9 @@ uuid4=$(cat /proc/sys/kernel/random/uuid)
 uuid5=$(cat /proc/sys/kernel/random/uuid)
 uuid6=$(cat /proc/sys/kernel/random/uuid)
 uuid8=$(cat /proc/sys/kernel/random/uuid)
+uuid9=$(cat /proc/sys/kernel/random/uuid)
 uuid10=$(cat /proc/sys/kernel/random/uuid)
+uuid11=$(cat /proc/sys/kernel/random/uuid)
 
 # // Certificate File
 path_crt="/etc/xray/xray.crt"
@@ -155,6 +157,49 @@ cat > /etc/xray/config.json << END
           "headers": {
             "Host": ""
           }
+        },
+        "quicSettings": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": 443,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "${uuid3}"
+#vmessgrpc
+          }
+         ],
+         "decryption": none"
+        },
+        "streamSettings": {
+          "network": "gun",
+          "security": "tls",
+          "tlsSettings": {
+             "serverName": "${domain}",
+                    "alpn": [
+                        "http/1.1",
+                        "h2"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/xray/xray.crt",
+                            "keyFile": "/etc/xray/xray.key"
+                        }
+                    ]
+                },
+                "grpcSettings": {
+                    "serviceName": "GunService"
+                }
+            ]
         },
         "quicSettings": {}
       },
@@ -246,6 +291,49 @@ cat > /etc/xray/config.json << END
     },
     {
       "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "${uuid11}"
+#vlessgrpc
+          }
+         ],
+         "decryption": none"
+        },
+        "streamSettings": {
+          "network": "gun",
+          "security": "tls",
+          "tlsSettings": {
+             "serverName": "${domain}",
+                    "alpn": [
+                        "http/1.1",
+                        "h2"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/xray/xray.crt",
+                            "keyFile": "/etc/xray/xray.key"
+                        }
+                    ]
+                },
+                "grpcSettings": {
+                    "serviceName": "GunService"
+                }
+            ]
+        },
+        "quicSettings": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": 443,
       "protocol": "trojan",
       "settings": {
         "clients": [
@@ -269,6 +357,9 @@ cat > /etc/xray/config.json << END
               "certificateFile": "${path_crt}",
               "keyFile": "${path_key}"
             }
+          ],
+          "alpn": [
+            "http/1.1"
           ]
         },
         "tcpSettings": {},
@@ -319,6 +410,53 @@ cat > /etc/xray/config.json << END
           "headers": {
             "Host": ""
           }
+        },
+        "quicSettings": {}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
+    {
+      "port": 443,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "id": "${uuid12}"
+#trojangrpc
+          }
+        ],
+        "fallbacks": [
+          {
+            "dest": 80
+          }
+        ]
+      },
+        "streamSettings": {
+          "network": "gun",
+          "security": "tls",
+          "tlsSettings": {
+             "serverName": "${domain}",
+                    "alpn": [
+                        "http/1.1",
+                        "h2"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/xray/xray.crt",
+                            "keyFile": "/etc/xray/xray.key"
+                        }
+                    ]
+                },
+                "grpcSettings": {
+                    "serviceName": "GunService"
+                }
+            ]
         },
         "quicSettings": {}
       },
