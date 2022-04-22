@@ -210,9 +210,9 @@ systemctl restart sslh
 
 # install squid
 cd
-apt -y install squid3
-wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/jagoanneon01/njajal/main/squid3.conf"
-sed -i $MYIP2 /etc/squid/squid.conf
+#apt -y install squid3
+#wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/jagoanneon01/njajal/main/squid3.conf"
+#sed -i $MYIP2 /etc/squid/squid.conf
 
 # setting vnstat
 apt -y install vnstat
@@ -464,6 +464,7 @@ chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/openvpn restart
 /etc/init.d/cron restart
 /etc/init.d/ssh restart
+/etc/init.d/stunnel4 restart
 /etc/init.d/dropbear restart
 /etc/init.d/fail2ban restart
 /etc/init.d/sslh restart
