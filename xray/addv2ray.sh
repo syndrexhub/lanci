@@ -52,9 +52,11 @@ sed -i '/#xray-vmess-tls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#xray-vmess-nontls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/config.json
 cat>/etc/xray/vmess-$user-tls.json<<EOF
       {
-      "v": "2",
+      "v": "3",
       "ps": "${user}",
       "add": "${domain}",
       "port": "${tls}",
@@ -69,7 +71,7 @@ cat>/etc/xray/vmess-$user-tls.json<<EOF
 EOF
 cat>/etc/xray/vmess-$user-nontls.json<<EOF
       {
-      "v": "2",
+      "v": "3",
       "ps": "${user}",
       "add": "${bug}",
       "port": "${nontls}",
@@ -84,7 +86,7 @@ cat>/etc/xray/vmess-$user-nontls.json<<EOF
 EOF
 cat >/etc/xray/$user-tls.json << EOF
       {
-      "v": "2",
+      "v": "3",
       "ps": "${user}",
       "add": "${domain}",
       "port": "${tls}",
