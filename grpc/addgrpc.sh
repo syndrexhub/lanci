@@ -64,6 +64,7 @@ vmesslink11="vmess://$(base64 -w 0 /etc/xray/$user-tls.json)"
 vmesslink1="vmess://${uuid}@${domain}:${tls}/?type=grpc&encryption=auto&serviceName=GunService&security=tls&sni=${bug}#$user"
 vmesslink2="vmess://${uuid}@${domain}:${tls}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 vlesslink1="vless://${uuid}@${domain}:${vl}?mode=gun&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
+vlesslink2="vless://${uuid}@${domain}:${vl}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 systemctl restart vmess-grpc.service
 systemctl restart vless-grpc.service
 service cron restart
@@ -77,11 +78,10 @@ echo -e "Port VMess        : ${tls}"
 echo -e "Port VLess        : ${vl}"
 echo -e "ID                : ${uuid}"
 echo -e "Alter ID          : 0"
-echo -e "Mode              : Gun"
+echo -e "Mode              : Multi"
 echo -e "Security          : TLS"
 echo -e "Type              : grpc"
-echo -e "Jaringan          : GRPC"
-echo -e "Service Name gRPC : GunService"
+echo -e "Service Name      : GunService"
 echo -e "SNI               : ${bug}"
 echo -e "══════════════════════" | lolcat
 echo -e "Link VMess GRPC  : "
@@ -94,7 +94,14 @@ echo -e "${vmesslink11}"
 echo -e "══════════════════════" | lolcat
 echo -e "Link VLess GRPC  : "
 echo -e "=•=•=•=•=•=•=•=•=•=•="
+echo -e "****GuN MODE****"
 echo -e "${vlesslink1}"
+echo -e "=•=•=•=•=•=•=•=•=•=•="
+echo -e "****MULTI MODE TCP& Websocket****"
+echo -e "${vlesslink2}"
+echo -e "══════════════════════" | lolcat
+echo -e "Created : $hariini"
+echo -e "Expired : $exp"
 echo -e "══════════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
 echo -e "══════════════════════" | lolcat
