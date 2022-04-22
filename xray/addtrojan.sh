@@ -52,10 +52,13 @@ sed -i '/#xray-trojan-wsnone$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#xray-trojan$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#trojan-grpc$/a\#&# '"$user $exp"'\
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
 systemctl restart xray.service
 trojanlink="trojan://${user}@${domain}:${tr}/${bug}"
 link="trojan://${user}@${bug}:443/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
 link2="trojan://${user}@${bug}:80/?type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link3="trojan://${user}@${bug}:443/?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 service cron restart
 clear
 echo -e ""
@@ -66,6 +69,7 @@ echo -e "Remarks    : ${user}"
 echo -e "IP/Host    : ${MYIP}"
 echo -e "Address    : ${domain}"
 echo -e "Port TCP   : ${tr}"
+echo -e "Port GRPC  : 443"
 echo -e "Port WSTLS : 443"
 echo -e "Port WSNONE: 80"
 echo -e "Key        : ${user}"
@@ -75,6 +79,9 @@ echo -e "Expired    : $exp"
 echo -e "════════════════" | lolcat
 echo -e "Link TR  : "
 echo -e ">>>> ${trojanlink}"
+echo -e "════════════════" | lolcat
+echo -e "Link TR GRPC  : "
+echo -e ">>>> ${link3}"
 echo -e "════════════════" | lolcat
 echo -e "Link TR WSTLS  : "
 echo -e ">>>> ${link}"
