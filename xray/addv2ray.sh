@@ -82,7 +82,7 @@ cat>/etc/xray/vmess-$user-nontls.json<<EOF
       "tls": "none"
 }
 EOF
-cat > /etc/xray/$user-tls.json << EOF
+cat >/etc/xray/$user-tls.json << EOF
       {
       "v": "2",
       "ps": "${user}",
