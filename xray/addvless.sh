@@ -54,6 +54,7 @@ sed -i '/#xray-vless-nontls$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 xrayvless1="vless://${uuid}@${domain}:$tls?path=/Ronggolawe&security=tls&encryption=none&type=ws#${user}"
 xrayvless2="vless://${uuid}@${domain}:$nontls?path=/Ronggolawe&encryption=none&type=ws#${user}"
+xrayvless3="vless://${uuid}@${domain}:${vl}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 systemctl restart xray.service
 service cron restart
 clear
@@ -74,13 +75,17 @@ echo -e "Path        : /Ronggolawe"
 echo -e "Created     : $hariini"
 echo -e "Expired     : $exp"
 echo -e "════════════════" | lolcat
-echo -e "Link TLS    : 
+echo -e "Link TLS    : "
 echo -e ""
 echo -e " ${xrayvless1}"
 echo -e "════════════════" | lolcat
-echo -e "Link No TLS : 
+echo -e "Link No TLS : "
 echo -e ""
 echo -e " ${xrayvless2}"
+echo -e "════════════════" | lolcat
+echo -e "Link No GRPC : "
+echo -e ""
+echo -e " ${xrayvless3}"
 echo -e "════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
 echo -e "════════════════" | lolcat
