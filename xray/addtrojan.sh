@@ -54,9 +54,8 @@ sed -i '/#xray-trojan$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
 systemctl restart xray.service
 trojanlink="trojan://${user}@${domain}:${tr}/${bug}"
-trojanlinkk="trojan://${user}@${MYIP}:${tr}/${bug}"
-link="trojan://${user}@${bug}:${2053}/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
-link2="trojan://${user}@${bug}:${2080}/?sni=none&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link="trojan://${user}@${bug}:443/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link2="trojan://${user}@${bug}:80/?type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
 service cron restart
 clear
 echo -e ""
@@ -67,8 +66,8 @@ echo -e "Remarks    : ${user}"
 echo -e "IP/Host    : ${MYIP}"
 echo -e "Address    : ${domain}"
 echo -e "Port TCP   : ${tr}"
-echo -e "Port WSTLS : 2053"
-echo -e "Port WSNONE: 2080"
+echo -e "Port WSTLS : 443"
+echo -e "Port WSNONE: 80"
 echo -e "Key        : ${user}"
 echo -e "Bug        : ${bug}"
 echo -e "Created    : $hariini"
@@ -76,9 +75,6 @@ echo -e "Expired    : $exp"
 echo -e "════════════════" | lolcat
 echo -e "Link TR  : "
 echo -e ">>>> ${trojanlink}"
-echo -e "════════════════" | lolcat
-echo -e "Link TR IP  : "
-echo -e ">>>> ${trojanlinkk}"
 echo -e "════════════════" | lolcat
 echo -e "Link TR WSTLS  : "
 echo -e ">>>> ${link}"
