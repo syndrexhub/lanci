@@ -81,8 +81,6 @@ uuid5=$(cat /proc/sys/kernel/random/uuid)
 uuid6=$(cat /proc/sys/kernel/random/uuid)
 uuid8=$(cat /proc/sys/kernel/random/uuid)
 uuid9=$(cat /proc/sys/kernel/random/uuid)
-uuid10=$(cat /proc/sys/kernel/random/uuid)
-uuid11=$(cat /proc/sys/kernel/random/uuid)
 
 # // Certificate File
 path_crt="/etc/xray/xray.crt"
@@ -103,7 +101,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "id": "${uuid1}",
+            "id": "${uuid}",
             "alterId": 0
 #xray-vmess-tls
           }
@@ -139,7 +137,7 @@ cat > /etc/xray/config.json << END
         "clients": [
 
           {
-            "id": "${uuid2}",
+            "id": "${uuid1}",
             "alterId": 0
 #xray-vmess-nontls
           }
@@ -174,7 +172,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "id": "${uuid3}"
+            "id": "${uuid2}"
 #vmessgrpc
           }
          ],
@@ -184,22 +182,22 @@ cat > /etc/xray/config.json << END
           "network": "gun",
           "security": "tls",
           "tlsSettings": {
-             "serverName": "${domain}",
-                    "alpn": [
-                        "http/1.1",
-                        "h2"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/etc/xray/xray.crt",
-                            "keyFile": "/etc/xray/xray.key"
-                        }
-                    ]
-                },
-                "grpcSettings": {
-                    "serviceName": "GunService"
-                }
-            ]
+          "serverName": "${domain}",
+            "alpn": [
+              "http/1.1",
+              "h2"
+           ],
+            "certificates": [
+              {
+                "certificateFile": "/etc/xray/xray.crt",
+                "keyFile": "/etc/xray/xray.key"
+              }
+           ]
+         },
+          "grpcSettings": {
+            "serviceName": "GunService"
+            }
+          ]
         },
         "quicSettings": {}
       },
@@ -295,7 +293,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "id": "${uuid11}"
+            "id": "${uuid5}"
 #vlessgrpc
           }
          ],
@@ -305,22 +303,22 @@ cat > /etc/xray/config.json << END
           "network": "gun",
           "security": "tls",
           "tlsSettings": {
-             "serverName": "${domain}",
-                    "alpn": [
-                        "http/1.1",
-                        "h2"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/etc/xray/xray.crt",
-                            "keyFile": "/etc/xray/xray.key"
-                        }
-                    ]
-                },
-                "grpcSettings": {
-                    "serviceName": "GunService"
-                }
-            ]
+          "serverName": "${domain}",
+            "alpn": [
+              "http/1.1",
+              "h2"
+           ],
+            "certificates": [
+              {
+                "certificateFile": "/etc/xray/xray.crt",
+                "keyFile": "/etc/xray/xray.key"
+              }
+           ]
+         },
+          "grpcSettings": {
+            "serviceName": "GunService"
+            }
+          ]
         },
         "quicSettings": {}
       },
@@ -338,7 +336,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid}"
+            "password": "${uuid6}"
 #xray-trojan-wstls
           }
         ],
@@ -388,7 +386,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid10}"
+            "password": "${uuid7}"
 #xray-trojan-wsnone
           }
         ],
@@ -427,7 +425,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "id": "${uuid12}"
+            "id": "${uuid8}"
 #trojangrpc
           }
         ],
@@ -441,22 +439,22 @@ cat > /etc/xray/config.json << END
           "network": "gun",
           "security": "tls",
           "tlsSettings": {
-             "serverName": "${domain}",
-                    "alpn": [
-                        "http/1.1",
-                        "h2"
-                    ],
-                    "certificates": [
-                        {
-                            "certificateFile": "/etc/xray/xray.crt",
-                            "keyFile": "/etc/xray/xray.key"
-                        }
-                    ]
-                },
-                "grpcSettings": {
-                    "serviceName": "GunService"
-                }
-            ]
+          "serverName": "${domain}",
+            "alpn": [
+              "http/1.1",
+              "h2"
+           ],
+            "certificates": [
+              {
+                "certificateFile": "/etc/xray/xray.crt",
+                "keyFile": "/etc/xray/xray.key"
+              }
+           ]
+         },
+          "grpcSettings": {
+            "serviceName": "GunService"
+            }
+          ]
         },
         "quicSettings": {}
       },
@@ -474,7 +472,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid5}"
+            "password": "${uuid9}"
 #xray-trojan
           }
         ],
