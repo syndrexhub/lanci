@@ -52,8 +52,8 @@ sed -i '/#xray-vless-tls$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#xray-vless-nontls$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#vless-grpc$/a\#### '"$user $exp"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#vlessgrpc$/a\#### '"$user $exp"'\
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/vlessgrpc.json
 xrayvless1="vless://${uuid}@${domain}:$tls?path=/Ronggolawe&security=tls&encryption=none&type=ws#${user}"
 xrayvless2="vless://${uuid}@${domain}:$nontls?path=/Ronggolawe&encryption=none&type=ws#${user}"
 xrayvless3="vless://${uuid}@${domain}:$tls?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
@@ -62,35 +62,36 @@ service cron restart
 clear
 echo -e ""
 echo -e "════════════════" | lolcat
-echo -e "${RED}====-XRAYS/VLESS-====${NC}"
+echo -e "${RED}====-XRAYS/VLESS-====${NC}" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Remarks     : ${user}"
-echo -e "IP/Host     : ${MYIP}"
-echo -e "Address     : ${domain}"
-echo -e "Port TLS    : $tls"
-echo -e "Port No TLS : $nontls"
-echo -e "User ID     : ${uuid}"
-echo -e "Encryption  : none"
-echo -e "Network     : WS & Grpc"
-echo -e "Mode        : Multi"
-echo -e "SecurityGRPC: TLS"
-echo -e "Type        : GRPC"
-echo -e "Bug.        : ${bug}
-echo -e "Path        : /Ronggolawe"
-echo -e "Created     : $hariini"
-echo -e "Expired     : $exp"
+echo -e "Remarks     : ${user}" | lolcat
+echo -e "IP/Host     : ${MYIP}" | lolcat
+echo -e "Address     : ${domain}" | lolcat
+echo -e "Port TLS    : $tls" | lolcat
+echo -e "Port No TLS : $nontls" | lolcat
+echo -e "User ID     : ${uuid}" | lolcat
+echo -e "Encryption  : none" | lolcat
+echo -e "Network     : WS & Grpc" | lolcat
+echo -e "Mode        : Multi" | lolcat
+echo -e "SecurityGRPC: TLS" | lolcat
+echo -e "Type        : GRPC" | lolcat
+echo -e "Bug.        : ${bug}" | lolcat
+echo -e "Path        : /Ronggolawe" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Link TLS    : "
+echo -e "Link TLS    : " | lolcat
 echo -e ""
-echo -e " ${xrayvless1}"
+echo -e " ${xrayvless1}" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Link No TLS : "
+echo -e "Link No TLS : " | lolcat
 echo -e ""
-echo -e " ${xrayvless2}"
+echo -e " ${xrayvless2}" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Link No GRPC : "
+echo -e "Link No GRPC : " | lolcat
 echo -e ""
-echo -e " ${xrayvless3}"
+echo -e " ${xrayvless3}" | lolcat
+echo -e "════════════════" | lolcat
+echo -e "Created     : $hariini" | lolcat
+echo -e "Expired     : $exp" | lolcat
 echo -e "════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
 echo -e "════════════════" | lolcat
