@@ -52,7 +52,7 @@ sed -i '/#xray-vmess-tls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#xray-vmess-nontls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
+sed -i '/#vmess-grpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/config.json
 cat>/etc/xray/vmess-$user-tls.json<<EOF
       {
@@ -89,7 +89,7 @@ cat >/etc/xray/$user-tls.json << EOF
       "v": "3",
       "ps": "${user}",
       "add": "${domain}",
-      "port": "${tls}",
+      "port": "443",
       "id": "${uuid}",
       "aid": "0",
       "net": "grpc",
@@ -117,6 +117,7 @@ echo -e "IP/Host     : ${MYIP}"
 echo -e "Address     : ${domain}"
 echo -e "Port TLS    : ${tls}"
 echo -e "Port No TLS : ${nontls}"
+echo -e "Port GRPC   : 443"
 echo -e "User ID     : ${uuid}"
 echo -e "Alter ID    : 0"
 echo -e "Security WS : auto"
