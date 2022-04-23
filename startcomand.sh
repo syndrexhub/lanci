@@ -128,6 +128,11 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
 echo "clear" >> .profile
 echo "neofetch" >> .profile
+echo "echo SELAMAT DATANG DI AUTOSCRIPT PREMIUM" >> .profile
+echo "echo SCRIPT PREMIUM BY JAGOANNEON" >> .profile
+echo "echo CONTACT PERSON WHATSAPP : wa.me/+6283857684916" >> .profile
+echo "echo Ketik menu Untuk Menampilkan Daftar Perintah..." >> .profile
+
 
 # install webserver
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
@@ -329,7 +334,7 @@ wget -O trial-vmess "https://raw.githubusercontent.com/jagoanneon01/njajal/main/
 wget -O trial-vless "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-vless.sh"
 wget -O trial-trojan "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-trojan.sh"
 wget -O trial-trojango "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-trojango.sh"
-wget -O trial-grpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-grpc.sh"
+#wget -O trial-grpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-grpc.sh"
 wget -O speedtest "https://raw.githubusercontent.com/jagoanneon01/njajal/main/speedtest_cli.py"
 wget -O restart "https://raw.githubusercontent.com/jagoanneon01/njajal/main/restart.sh"
 wget -O autokill "https://raw.githubusercontent.com/jagoanneon01/njajal/main/autokill.sh"
@@ -386,8 +391,8 @@ chmod +x trial-trojan
 sed -i -e 's/\r$//' trial-trojan
 chmod +x trial-trojango
 sed -i -e 's/\r$//' trial-trojango
-chmod +x trial-grpcc
-sed -i -e 's/\r$//' trial-grpcc
+#chmod +x trial-grpcc
+#sed -i -e 's/\r$//' trial-grpcc
 chmod +x speedtest
 chmod +x info
 chmod +x about
