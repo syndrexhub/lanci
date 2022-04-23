@@ -52,7 +52,7 @@ sed -i '/#xray-vless-tls$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#xray-vless-nontls$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#vlessgrpc$/a\#### '"$user $exp"'\
+sed -i '/#vless-grpc$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 xrayvless1="vless://${uuid}@${domain}:$tls?path=/Ronggolawe&security=tls&encryption=none&type=ws#${user}"
 xrayvless2="vless://${uuid}@${domain}:$nontls?path=/Ronggolawe&encryption=none&type=ws#${user}"
@@ -71,7 +71,10 @@ echo -e "Port TLS    : $tls"
 echo -e "Port No TLS : $nontls"
 echo -e "User ID     : ${uuid}"
 echo -e "Encryption  : none"
-echo -e "Network     : ws"
+echo -e "Network     : WS & Grpc"
+echo -e "Mode        : Multi"
+echo -e "SecurityGRPC: TLS"
+echo -e "Type        : GRPC"
 echo -e "Bug.        : ${bug}
 echo -e "Path        : /Ronggolawe"
 echo -e "Created     : $hariini"
