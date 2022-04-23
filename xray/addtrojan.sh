@@ -56,29 +56,29 @@ sed -i '/#trojangrpc$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojangrpc.json
 systemctl restart xray.service
 trojanlink="trojan://${user}@${domain}:${tr}/${bug}"
-link="trojan://${user}@${bug}:8443/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
-link2="trojan://${user}@${bug}:8880/?type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
-link3="trojan://${user}@${bug}:4443/?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
+link="trojan://${user}@${bug}:2053/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link2="trojan://${user}@${bug}:2080/?type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link3="trojan://${user}@${bug}:3443/?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${domain}#$user"
 service cron restart
 clear
 echo -e ""
-echo -e "════════════════" | lolcat
-echo -e "=•=•-XRAYS/TROJAN-=•=•" | lolcat
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
+echo -e "====•=•-XRAYS/TROJAN-=•=•==" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "Remarks     : ${user}" | lolcat
 echo -e "IP/Host     : ${MYIP}" | lolcat
 echo -e "Address     : ${domain}" | lolcat
 echo -e "Port TCP    : ${tr}" | lolcat
-echo -e "Port GRPC   : 4443" | lolcat
-echo -e "Port WSTLS  : 8443" | lolcat
-echo -e "Port WSNONE : 8880" | lolcat
+echo -e "Port GRPC   : 3443" | lolcat
+echo -e "Port WSTLS  : 2053" | lolcat
+echo -e "Port WSNONE : 2080" | lolcat
 echo -e "Network     : TCP & Grpc" | lolcat
 echo -e "Mode        : Multi" | lolcat
 echo -e "SecurityGRPC: TLS" | lolcat
 echo -e "Type        : GRPC" | lolcat
 echo -e "Key         : ${user}" | lolcat
 echo -e "Bug         : ${bug}" | lolcat
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "Link TR  : " | lolcat
 echo -e ">>>> ${trojanlink}" | lolcat
 echo -e "════════════════" | lolcat
@@ -90,12 +90,12 @@ echo -e ">>>> ${link}" | lolcat
 echo -e "════════════════" | lolcat
 echo -e "Link TR WSNONE  : " | lolcat
 echo -e ">>>> ${link2}" | lolcat
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "Created     : $hariini" | lolcat
 echo -e "Expired     : $exp" | lolcat
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e""
 read -p "Ketik Enter Untuk Kembali Ke Menu...."
 sleep 1
