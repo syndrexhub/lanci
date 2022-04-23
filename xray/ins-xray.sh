@@ -72,15 +72,12 @@ bash acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypa
 
 service squid start
 uuid=$(cat /proc/sys/kernel/random/uuid)
-uuid7=$(cat /proc/sys/kernel/random/uuid)
 uuid1=$(cat /proc/sys/kernel/random/uuid)
 uuid2=$(cat /proc/sys/kernel/random/uuid)
 uuid3=$(cat /proc/sys/kernel/random/uuid)
 uuid4=$(cat /proc/sys/kernel/random/uuid)
 uuid5=$(cat /proc/sys/kernel/random/uuid)
 uuid6=$(cat /proc/sys/kernel/random/uuid)
-uuid8=$(cat /proc/sys/kernel/random/uuid)
-uuid9=$(cat /proc/sys/kernel/random/uuid)
 
 # // Certificate File
 path_crt="/etc/xray/xray.crt"
@@ -135,7 +132,6 @@ cat > /etc/xray/config.json << END
       "protocol": "vmess",
       "settings": {
         "clients": [
-
           {
             "id": "${uuid1}",
             "alterId": 0
@@ -168,54 +164,11 @@ cat > /etc/xray/config.json << END
     },
     {
       "port": 443,
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "${uuid2}"
-#vmess-grpc
-          }
-         ],
-         "decryption": none"
-        },
-        "streamSettings": {
-          "network": "gun",
-          "security": "tls",
-          "tlsSettings": {
-          "serverName": "${domain}",
-            "alpn": [
-              "http/1.1",
-              "h2"
-           ],
-            "certificates": [
-              {
-                "certificateFile": "/etc/xray/xray.crt",
-                "keyFile": "/etc/xray/xray.key"
-              }
-           ]
-         },
-          "grpcSettings": {
-            "serviceName": "GunService"
-            }
-          ]
-        },
-        "quicSettings": {}
-      },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
-    {
-      "port": 443,
       "protocol": "vless",
       "settings": {
         "clients": [
           {
-            "id": "${uuid3}"
+            "id": "${uuid2}"
 #xray-vless-tls
           }
         ],
@@ -258,7 +211,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "id": "${uuid4}"
+            "id": "${uuid3}"
 #xray-vless-nontls
           }
         ],
@@ -276,49 +229,6 @@ cat > /etc/xray/config.json << END
           "headers": {
             "Host": ""
           }
-        },
-        "quicSettings": {}
-      },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
-    {
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "clients": [
-          {
-            "id": "${uuid5}"
-#vless-grpc
-          }
-         ],
-         "decryption": none"
-        },
-        "streamSettings": {
-          "network": "gun",
-          "security": "tls",
-          "tlsSettings": {
-          "serverName": "${domain}",
-            "alpn": [
-              "http/1.1",
-              "h2"
-           ],
-            "certificates": [
-              {
-                "certificateFile": "/etc/xray/xray.crt",
-                "keyFile": "/etc/xray/xray.key"
-              }
-           ]
-         },
-          "grpcSettings": {
-            "serviceName": "GunService"
-            }
-          ]
         },
         "quicSettings": {}
       },
@@ -425,7 +335,24 @@ RestartPreventExitStatus=23
 WantedBy=multi-user.target
 END
 
-#konfigurasi Trojan
+# // Enable & Start Service
+# Accept port Xray & Trojan
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 80 -j ACCEPT
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+netfilter-persistent save
+netfilter-persistent reload
+systemctl daemon-reload
+systemctl stop xray.service
+systemctl start xray.service
+systemctl enable xray.service
+systemctl restart xray.service
+
+
+# Buat konfigurasi Trojan
 cat > /etc/xray/trojan.json << END
 {
   "log": {
@@ -440,7 +367,7 @@ cat > /etc/xray/trojan.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid6}"
+            "password": "${uuid4}"
 #xray-trojan-wstls
           }
         ],
@@ -490,7 +417,7 @@ cat > /etc/xray/trojan.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid7}"
+            "password": "${uuid5}"
 #xray-trojan-wsnone
           }
         ],
@@ -523,59 +450,13 @@ cat > /etc/xray/trojan.json << END
         ]
       }
     },
-    {
-      "port": 8443,
-      "protocol": "trojan",
-      "settings": {
-        "clients": [
-          {
-            "id": "${uuid8}"
-#trojan-grpc
-          }
-        ],
-        "fallbacks": [
-          {
-            "dest": 80
-          }
-        ]
-      },
-        "streamSettings": {
-          "network": "gun",
-          "security": "tls",
-          "tlsSettings": {
-          "serverName": "${domain}",
-            "alpn": [
-              "http/1.1",
-              "h2"
-           ],
-            "certificates": [
-              {
-                "certificateFile": "/etc/xray/xray.crt",
-                "keyFile": "/etc/xray/xray.key"
-              }
-           ]
-         },
-          "grpcSettings": {
-            "serviceName": "GunService"
-            }
-          ]
-        },
-        "quicSettings": {}
-      },
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },     
+    {     
       "port": 2083,
       "protocol": "trojan",
       "settings": {
         "clients": [
           {
-            "password": "${uuid9}"
+            "password": "${uuid6}"
 #xray-trojan
           }
         ],
@@ -680,9 +561,10 @@ cat > /etc/xray/trojan.json << END
 }
 END
 
+# Install system Trojan
 cat > /etc/systemd/system/trojan.service << END
 [Unit]
-Description=Xray Service By JAGOANNEON
+Description=Xray-Trojan Service By JAGOANNEON
 Documentation=http://jagoanneon-premium.xyz
 After=network.target nss-lookup.target
 
@@ -699,12 +581,7 @@ RestartPreventExitStatus=23
 WantedBy=multi-user.target
 END
 
-# // Enable & Start Service
-# Accept port Xray
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 443 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 443 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 80 -j ACCEPT
+# Setup Trojan-Route
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8443 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8443 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
@@ -716,10 +593,6 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 systemctl daemon-reload
-systemctl stop xray.service
-systemctl start xray.service
-systemctl enable xray.service
-systemctl restart xray.service
 systemctl stop trojan.service
 systemctl start trojan.service
 systemctl enable trojan.service
