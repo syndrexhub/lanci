@@ -405,7 +405,28 @@ cat > /etc/xray/config.json << END
 }
 END
 
-cat > /etc/xray/config2.json << END
+# / / Installation Xray Service
+cat > /etc/systemd/system/xray.service << END
+[Unit]
+Description=Xray Service By JAGOANNEON
+Documentation=http://jagoanneon-premium.xyz
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/xray -config /etc/xray/config.json
+Restart=on-failure
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+END
+
+#konfigurasi Trojan
+cat > /etc/xray/trojan.json << END
 {
   "log": {
     "access": "/var/log/xray/access2.log",
@@ -659,27 +680,6 @@ cat > /etc/xray/config2.json << END
 }
 END
 
-
-# / / Installation Xray Service
-cat > /etc/systemd/system/xray.service << END
-[Unit]
-Description=Xray Service By JAGOANNEON
-Documentation=http://jagoanneon-premium.xyz
-After=network.target nss-lookup.target
-
-[Service]
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray -config /etc/xray/config.json
-Restart=on-failure
-RestartPreventExitStatus=23
-
-[Install]
-WantedBy=multi-user.target
-END
-
 cat > /etc/systemd/system/trojan.service << END
 [Unit]
 Description=Xray Service By JAGOANNEON
@@ -691,7 +691,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/local/bin/xray -config /etc/xray/config2.json
+ExecStart=/usr/local/bin/xray -config /etc/xray/trojan.json
 Restart=on-failure
 RestartPreventExitStatus=23
 
