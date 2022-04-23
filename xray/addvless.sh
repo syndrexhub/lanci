@@ -56,19 +56,20 @@ sed -i '/#vlessgrpc$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/vlessgrpc.json
 xrayvless1="vless://${uuid}@${domain}:$tls?path=/Ronggolawe&security=tls&encryption=none&type=ws#${user}"
 xrayvless2="vless://${uuid}@${domain}:$nontls?path=/Ronggolawe&encryption=none&type=ws#${user}"
-xrayvless3="vless://${uuid}@${domain}:$tls?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
+xrayvless3="vless://${uuid}@${domain}:1443?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 systemctl restart xray.service
 service cron restart
 clear
 echo -e ""
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "${RED}====-XRAYS/VLESS-====${NC}" | lolcat
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "Remarks     : ${user}" | lolcat
 echo -e "IP/Host     : ${MYIP}" | lolcat
 echo -e "Address     : ${domain}" | lolcat
 echo -e "Port TLS    : $tls" | lolcat
 echo -e "Port No TLS : $nontls" | lolcat
+echo -e "Port GRPC   : 1443" | lolcat
 echo -e "User ID     : ${uuid}" | lolcat
 echo -e "Encryption  : none" | lolcat
 echo -e "Network     : WS & Grpc" | lolcat
@@ -77,7 +78,7 @@ echo -e "SecurityGRPC: TLS" | lolcat
 echo -e "Type        : GRPC" | lolcat
 echo -e "Bug.        : ${bug}" | lolcat
 echo -e "Path        : /Ronggolawe" | lolcat
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "Link TLS    : " | lolcat
 echo -e ""
 echo -e " ${xrayvless1}" | lolcat
@@ -89,12 +90,12 @@ echo -e "════════════════" | lolcat
 echo -e "Link No GRPC : " | lolcat
 echo -e ""
 echo -e " ${xrayvless3}" | lolcat
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "Created     : $hariini" | lolcat
 echo -e "Expired     : $exp" | lolcat
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
-echo -e "════════════════" | lolcat
+echo -e "═══════════════════════" | lolcat
 echo -e""
 read -p "Ketik Enter Untuk Kembali Ke Menu...."
 sleep 1
