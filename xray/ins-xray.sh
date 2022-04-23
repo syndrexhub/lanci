@@ -570,5 +570,152 @@ systemctl start trojan.service
 systemctl enable trojan.service
 systemctl restart trojan.service
 
+#TrojanGRPC
+cat > /etc/xray/trojangrpc.json << END
+{
+    "log": {
+            "access": "/var/log/xray/access3.log",
+        "error": "/var/log/xray/error.log",
+        "loglevel": "info"
+    },
+    "inbounds": [
+        {
+            "port": 3443,
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "${uuid7}"
+#trojangrpc
+                    }
+                 ],
+                 "fallbacks": [
+                   {
+                      "dest": 80
+                   }
+               ]
+           },
+            "streamSettings": {
+                "network": "gun",
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "${domain}",
+                    "alpn": [
+                        "http/1.1",
+                        "h2"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/etc/xray/xray.crt",
+                            "keyFile": "/etc/xray/xray.key"
+                        }
+                    ]
+                },
+                "grpcSettings": {
+                    "serviceName": "GunService"
+                }
+            }
+        }
+    ],
+    "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "0.0.0.0/8",
+          "10.0.0.0/8",
+          "100.64.0.0/10",
+          "169.254.0.0/16",
+          "172.16.0.0/12",
+          "192.0.0.0/24",
+          "192.0.2.0/24",
+          "192.168.0.0/16",
+          "198.18.0.0/15",
+          "198.51.100.0/24",
+          "203.0.113.0/24",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10"
+        ],
+        "outboundTag": "blocked"
+      },
+      {
+        "inboundTag": [
+          "api"
+        ],
+        "outboundTag": "api",
+        "type": "field"
+      },
+      {
+        "type": "field",
+        "outboundTag": "blocked",
+        "protocol": [
+          "bittorrent"
+        ]
+      }
+    ]
+  },
+  "stats": {},
+  "api": {
+    "services": [
+      "StatsService"
+    ],
+    "tag": "api"
+  },
+  "policy": {
+    "levels": {
+      "0": {
+        "statsUserDownlink": true,
+        "statsUserUplink": true
+      }
+    },
+    "system": {
+      "statsInboundUplink": true,
+      "statsInboundDownlink": true
+    }
+  }
+}
+END
+
+cat > /etc/systemd/system/trojan-grpc.service << EOF
+[Unit]
+Description=XRay Trojan GRPC Service
+Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
+After=network.target nss-lookup.target
+
+[Service]
+User=root
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/xray -config /etc/xray/trojangrpc.json
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Setup TrojaGRPC
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 3443 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 3443 -j ACCEPT
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+netfilter-persistent save
+netfilter-persistent reload
+systemctl daemon-reload
+systemctl stop trojan-grpc.service
+systemctl start trojan-grpc.service
+systemctl enable trojan-grpc.service
+systemctl restart trojan-grpc.service
+
 cd
 cp /root/domain /etc/xray
