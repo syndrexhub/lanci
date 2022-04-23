@@ -9,7 +9,6 @@ echo -e "━━━━━━━━━━━━━━━━━━━━━━━�
 echo -e "* menu              : Menampilkan Daftar Perintah" | lolcat
 echo -e "* Attention         : Silahkan Ketik Perintah Sesuai Dengan List Di Menu" | lolcat
 echo -e "* Lokasimu          : $WKT " | lolcat
-echo -e "* JAM               : date |lolcat
 echo -e ""
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━ TRIAL-VPN ━━━━━━━━━━━━━━━━━━" | lolcat
 echo -e "* trial-ssh         : Membuat Trial Akun SSH" | lolcat
@@ -17,7 +16,6 @@ echo -e "* trial-vmess       : Membuat Trial Akun Vmess" | lolcat
 echo -e "* trial-vless       : Membuat Trial Akun Vless" | lolcat
 echo -e "* trial-trojan      : Membuat Trial Akun trojan" | lolcat
 echo -e "* trial-trojango    : Membuat Trial Akun trojan-go" | lolcat
-echo -e "* trial-grpcc       : Membuat Trial Akun grpc" | lolcat
 echo -e ""
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━ SSH-OVPN ━━━━━━━━━━━━━━━━━━" | lolcat
 echo -e "* addssh            : Membuat Akun SSH" | lolcat
@@ -32,12 +30,6 @@ echo -e "* addtrgo           : Membuat Akun Trojan-GO" | lolcat
 echo -e "* deltrgo           : Menghapus Akun Trojan-GO" | lolcat
 echo -e "* cektrgo           : Cek User Login Trojan-GO" | lolcat
 echo -e "* renewtrgo         : Memperpanjang Masa Aktif Akun Trojan-GO" | lolcat
-echo -e ""
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━ GRPC ━━━━━━━━━━━━━━━━━━━━━" | lolcat
-echo -e "* addgrpc        : Membuat Akun GRPC" | lolcat
-echo -e "* delgrpc        : Menghapus Akun GRPC" | lolcat
-echo -e "* cekgrpc        : Memperpanjang Masa Aktif Akun GRPC" | lolcat
-echo -e "* renewgrpc      : Cek User Login GRPC" | lolcat
 echo -e ""
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━ VMESS ━━━━━━━━━━━━━━━━━━━━" | lolcat
 echo -e "* addvmess          : Membuat Akun V2RAY Vmess Websocket" | lolcat
