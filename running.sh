@@ -52,7 +52,7 @@ CITY=$( curl -s ipinfo.io/city )
 #clear
 
 # CHEK STATUS 
-l2tp_status=$(systemctl status xl2tpd | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+#l2tp_status=$(systemctl status xl2tpd | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 openvpn_service="$(systemctl show openvpn.service --no-page)"
 oovpn=$(echo "${openvpn_service}" | grep 'ActiveState=' | cut -f2 -d=)
 #status_openvp=$(/etc/init.d/openvpn status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
@@ -69,12 +69,15 @@ tls_v2ray_status=$(systemctl status xray | grep Active | awk '{print $3}' | cut 
 nontls_v2ray_status=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 vless_tls_v2ray_status=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 vless_nontls_v2ray_status=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-ssr_status=$(systemctl status ssrmu | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-trojan_server=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+#ssr_status=$(systemctl status ssrmu | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+trojan_server=$(systemctl status trojan | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+grpc_server=$(systemctl status vmess-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+grpcc_server=$(systemctl status vless-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+grpccc_server=$(systemctl status trojan-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 dropbear_status=$(/etc/init.d/dropbear status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-stunnel_service=$(/etc/init.d/stunnel5 status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-sstp_service=$(systemctl status accel-ppp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-squid_service=$(/etc/init.d/squid status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+stunnel_service=$(/etc/init.d/stunnel4 status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+#sstp_service=$(systemctl status accel-ppp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+#squid_service=$(/etc/init.d/squid status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 ssh_service=$(/etc/init.d/ssh status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 vnstat_service=$(/etc/init.d/vnstat status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 cron_service=$(/etc/init.d/cron status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
@@ -89,9 +92,9 @@ wsdrop=$(systemctl status ws-nontls | grep Active | awk '{print $3}' | cut -d "(
 wsovpn=$(systemctl status ws-ovpn | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 #wsopen=$(systemctl status ws-openssh | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 osslh=$(systemctl status sslh | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-ohp=$(systemctl status dropbear-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-ohq=$(systemctl status openvpn-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-ohr=$(systemctl status ssh-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+#ohp=$(systemctl status dropbear-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+#ohq=$(systemctl status openvpn-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+#ohr=$(systemctl status ssh-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 
 # COLOR VALIDATION
 RED='\033[0;31m'
@@ -104,18 +107,18 @@ CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 clear
 
-# STATUS SERVICE Shadowsocks HTTPS
-if [[ $sst_status == "running" ]]; then
-  status_sst=" ${GREEN}Running ${NC}( No Error )"
+# STATUS SERVICE VMess GRPC
+if [[ $grpc_server == "running" ]]; then
+  status_grpc=" ${GREEN}Running ${NC}( No Error )"
 else
-  status_sst="${RED}  Not Running ${NC}  ( Error )"
+  status_grpc="${RED}  Not Running ${NC}  ( Error )"
 fi
 
-# STATUS SERVICE Shadowsocks HTTP
-if [[ $ssh_status == "running" ]]; then 
-   status_ssh=" ${GREEN}Running ${NC}( No Error )"
+# STATUS SERVICE Vless GRPC
+if [[ $$grpcc_server == "running" ]]; then 
+   status_grpcc=" ${GREEN}Running ${NC}( No Error )"
 else
-   status_ssh="${RED}  Not Running ${NC}  ( Error )"
+   status_grpcc="${RED}  Not Running ${NC}  ( Error )"
 fi
 
 # STATUS SERVICE OPENVPN
@@ -188,11 +191,11 @@ else
   status_nontls_vless="${RED}  Not Running ${NC}  ( Error )${NC}"
 fi
 
-# SHADOWSOCKSR STATUS
-if [[ $ssr_status == "running" ]] ; then
-  status_ssr=" ${GREEN}Running${NC} ( No Error )${NC}"
+# Trojan gRPC
+if [[ $grpccc_server == "running" ]] ; then
+  status_grpccc=" ${GREEN}Running${NC} ( No Error )${NC}"
 else
-  status_ssr="${RED}  Not Running ${NC}  ( Error )${NC}"
+  status_grpccc="${RED}  Not Running ${NC}  ( Error )${NC}"
 fi
 
 # SODOSOK
@@ -360,7 +363,6 @@ echo -e "║ SSH / TUN               :$status_ssh"
 echo -e "║ OpenVPN                 :$status_openvpn"
 echo -e "║ Dropbear                :$status_beruangjatuh"
 echo -e "║ Stunnel4                :$status_stunnel"
-echo -e "║ Squid                   :$status_squid"
 echo -e "║ Fail2Ban                :$status_fail2ban"
 echo -e "║ Crons                   :$status_cron"
 echo -e "║ Vnstat                  :$status_vnstat"
@@ -370,6 +372,9 @@ echo -e "║ XRAYS Vless TLS         :$status_tls_vless"
 echo -e "║ XRAYS Vless None TLS    :$status_nontls_vless"
 echo -e "║ XRAYS Trojan            :$status_virus_trojan"
 echo -e "║ Trojan GO               :$status_trgo"
+echo -e "║ XRAYS Vmess GRPC        :$status_grpc"
+echo -e "║ XRAYS Vless GRPC        :$status_grpcc"
+echo -e "║ XRAYS Trojan GRPC       :$status_grpccc"
 echo -e "║ Websocket TLS           :$swstls"
 echo -e "║ Websocket None TLS      :$swsdrop"
 echo -e "║ Websocket Ovpn          :$swsovpn"
