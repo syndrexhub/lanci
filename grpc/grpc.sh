@@ -289,7 +289,9 @@ cat > /etc/xray/trojangrpc.json << END
 #trojangrpc
                     }
                 ],
-                "decryption": "none"
+                "fallbacks": [
+              {
+                "dest": 80
             },
             "streamSettings": {
                 "network": "gun",
