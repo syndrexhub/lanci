@@ -26,6 +26,7 @@ domain=$(cat /etc/xray/domain)
 read -rp "Masukkan Bug: " -e bug
 tls=$(cat /etc/xray/vmessgrpc.json | grep port | awk '{print $2}' | sed 's/,//g')
 vl=$(cat /etc/xray/vlessgrpc.json | grep port | awk '{print $2}' | sed 's/,//g')
+tr=$(cat /etc/xray/trojangrpc.json | grep port | awk '{print $2}' | sed 's/,//g')
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 		read -rp "User: " -e user
 		CLIENT_EXISTS=$(grep -w $user /etc/xray/vmessgrpc.json | wc -l)
@@ -44,6 +45,8 @@ sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/vmessgrpc.json
 sed -i '/#vlessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/vlessgrpc.json
+sed -i '/#trojangrpc$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/trojangrpc.json
 cat > /etc/xray/$user-tls.json << EOF
       {
       "v": "0",
@@ -64,44 +67,51 @@ vmesslink11="vmess://$(base64 -w 0 /etc/xray/$user-tls.json)"
 vmesslink1="vmess://${uuid}@${domain}:${tls}/?type=grpc&encryption=auto&serviceName=GunService&security=tls&sni=${bug}#$user"
 vmesslink2="vmess://${uuid}@${domain}:${tls}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 vlesslink1="vless://${uuid}@${domain}:${vl}?mode=gun&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
-vlesslink2="vless://${uuid}@${domain}:${vl}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
+vlesslink2="vless://${uuid}@${domain}:${tr}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
+trojanlink="trojan://${uuid}@${domain}:${tr}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 systemctl restart vmess-grpc.service
 systemctl restart vless-grpc.service
 service cron restart
 clear
 echo -e "══════════════════════" | lolcat
-echo -e "=•=•=•=•=•=XRAY GRPC=•=•=•=•=•=" 
+echo -e "=•=•=•=•=•=XRAY GRPC=•=•=•=•=•=" | lolcat 
 echo -e "══════════════════════" | lolcat
-echo -e "Remarks           : ${user}"
-echo -e "Domain            : ${domain}"
-echo -e "Port VMess        : ${tls}"
-echo -e "Port VLess        : ${vl}"
-echo -e "ID                : ${uuid}"
-echo -e "Alter ID          : 0"
-echo -e "Mode              : Multi"
-echo -e "Security          : TLS"
-echo -e "Type              : grpc"
-echo -e "Service Name      : GunService"
-echo -e "SNI               : ${bug}"
+echo -e "Remarks           : ${user}" | lolcat
+echo -e "Domain            : ${domain}" | lolcat
+echo -e "Port VMess        : ${tls}" | lolcat
+echo -e "Port VLess        : ${vl}" | lolcat
+echo -e "Port Trojan       : ${tr}" | lolcat
+echo -e "ID                : ${uuid}" | lolcat
+echo -e "Alter ID          : 0" | lolcat
+echo -e "Mode              : Multi" | lolcat
+echo -e "Security          : TLS" | lolcat
+echo -e "Type              : grpc" | lolcat
+echo -e "Service Name      : GunService" | lolcat
+echo -e "SNI               : ${bug}" | lolcat
 echo -e "══════════════════════" | lolcat
-echo -e "Link VMess GRPC  : "
-echo -e "=•=•=•=•=•=•=•=•=•=•="
-echo -e "${vmesslink1}"
-echo -e "=•=•=•=•=•=•=•=•=•=•="
-echo -e "${vmesslink2}"
-echo -e "=•=•=•=•=•=•=•=•=•=•="
-echo -e "${vmesslink11}"
+echo -e "Link VMess GRPC  : " | lolcat
+echo -e "=•=•=•=•=•=•=•=•=•=•=" | lolcat
+echo -e "${vmesslink1}" | lolcat
+echo -e "=•=•=•=•=•=•=•=•=•=•=" | lolcat
+echo -e "${vmesslink2}" | lolcat
+echo -e "=•=•=•=•=•=•=•=•=•=•=" | lolcat
+echo -e "${vmesslink11}" | lolcat
 echo -e "══════════════════════" | lolcat
-echo -e "Link VLess GRPC  : "
-echo -e "=•=•=•=•=•=•=•=•=•=•="
-echo -e "****GuN MODE****"
-echo -e "${vlesslink1}"
-echo -e "=•=•=•=•=•=•=•=•=•=•="
-echo -e "****MULTI MODE TCP& Websocket****"
-echo -e "${vlesslink2}"
+echo -e "Link VLess GRPC  : " | lolcat
+echo -e "=•=•=•=•=•=•=•=•=•=•=" | lolcat
+echo -e "****GuN MODE****" | lolcat
+echo -e "${vlesslink1}" | lolcat
+echo -e "=•=•=•=•=•=•=•=•=•=•=" | lolcat
+echo -e "****MULTI MODE TCP& Websocket****" | lolcat
+echo -e "${vlesslink2}" | lolcat
 echo -e "══════════════════════" | lolcat
-echo -e "Created : $hariini"
-echo -e "Expired : $exp"
+echo -e "Link Trojan GRPC  : " | lolcat
+echo -e "=•=•=•=•=•=•=•=•=•=•=" | lolcat
+echo -e "****MULTI MODE TCP& Websocket****" | lolcat
+echo -e "${trojanlink}" | lolcat
+echo -e "══════════════════════" | lolcat
+echo -e "Created : $hariini" | lolcat
+echo -e "Expired : $exp" | lolcat
 echo -e "══════════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
 echo -e "══════════════════════" | lolcat
