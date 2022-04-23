@@ -334,7 +334,7 @@ cat > /etc/xray/trojan.json << END
   },
   "inbounds": [
     {
-      "port": 8443,
+      "port": 2053,
       "protocol": "trojan",
       "settings": {
         "clients": [
@@ -384,7 +384,7 @@ cat > /etc/xray/trojan.json << END
       }
     },
     {
-      "port": 8880,
+      "port": 2080,
       "protocol": "trojan",
       "settings": {
         "clients": [
@@ -554,10 +554,10 @@ WantedBy=multi-user.target
 END
 
 # Setup Trojan-Route
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8443 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8443 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2053 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2053 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2080 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2080 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2083 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2083 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
