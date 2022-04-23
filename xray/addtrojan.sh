@@ -47,51 +47,52 @@ read -p "Expired (Days) : " masaaktif
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#xray-trojan-wstls$/a\#&# '"$user $exp"'\
-},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojan.json
 sed -i '/#xray-trojan-wsnone$/a\#&# '"$user $exp"'\
-},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojan.json
 sed -i '/#xray-trojan$/a\#&# '"$user $exp"'\
-},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#trojan-grpc$/a\#&# '"$user $exp"'\
-},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojan.json
+sed -i '/#trojangrpc$/a\#&# '"$user $exp"'\
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojangrpc.json
 systemctl restart xray.service
 trojanlink="trojan://${user}@${domain}:${tr}/${bug}"
-link="trojan://${user}@${bug}:443/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
-link2="trojan://${user}@${bug}:80/?type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
-link3="trojan://${user}@${bug}:443/?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
+link="trojan://${user}@${bug}:8443/?sni=${domain}&type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link2="trojan://${user}@${bug}:8880/?type=ws&host=${domain}&path=/Ronggolawe&encryption=none#$user"
+link3="trojan://${user}@${bug}:4443/?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 service cron restart
 clear
 echo -e ""
 echo -e "════════════════" | lolcat
-echo -e "=•=•-XRAYS/TROJAN-=•=•"
+echo -e "=•=•-XRAYS/TROJAN-=•=•" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Remarks    : ${user}"
-echo -e "IP/Host    : ${MYIP}"
-echo -e "Address    : ${domain}"
-echo -e "Port TCP   : ${tr}"
-echo -e "Port GRPC  : 443"
-echo -e "Port WSTLS : 443"
-echo -e "Port WSNONE: 80"
-echo -e "Network     : TCP & Grpc"
-echo -e "Mode        : Multi"
-echo -e "SecurityGRPC: TLS"
-echo -e "Type        : GRPC"
-echo -e "Key        : ${user}"
-echo -e "Bug        : ${bug}"
-echo -e "Created    : $hariini"
-echo -e "Expired    : $exp"
+echo -e "Remarks     : ${user}" | lolcat
+echo -e "IP/Host     : ${MYIP}" | lolcat
+echo -e "Address     : ${domain}" | lolcat
+echo -e "Port TCP    : ${tr}" | lolcat
+echo -e "Port GRPC   : 4443" | lolcat
+echo -e "Port WSTLS  : 8443" | lolcat
+echo -e "Port WSNONE : 8880" | lolcat
+echo -e "Network     : TCP & Grpc" | lolcat
+echo -e "Mode        : Multi" | lolcat
+echo -e "SecurityGRPC: TLS" | lolcat
+echo -e "Type        : GRPC" | lolcat
+echo -e "Key         : ${user}" | lolcat
+echo -e "Bug         : ${bug}" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Link TR  : "
-echo -e ">>>> ${trojanlink}"
+echo -e "Link TR  : " | lolcat
+echo -e ">>>> ${trojanlink}" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Link TR GRPC  : "
-echo -e ">>>> ${link3}"
+echo -e "Link TR GRPC  : " | lolcat
+echo -e ">>>> ${link3}" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Link TR WSTLS  : "
-echo -e ">>>> ${link}"
+echo -e "Link TR WSTLS  : " | lolcat
+echo -e ">>>> ${link}" | lolcat
 echo -e "════════════════" | lolcat
-echo -e "Link TR WSNONE  : "
-echo -e ">>>> ${link2}"
+echo -e "Link TR WSNONE  : " | lolcat
+echo -e ">>>> ${link2}" | lolcat
+echo -e "════════════════" | lolcat
+echo -e "Created     : $hariini" | lolcat
+echo -e "Expired     : $exp" | lolcat
 echo -e "════════════════" | lolcat
 echo -e "${RED}AutoScriptSSH By Ronggolawe${NC}"
 echo -e "════════════════" | lolcat
