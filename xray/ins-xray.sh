@@ -238,11 +238,9 @@ cat > /etc/xray/config.json << END
           "http",
           "tls"
         ]
-      }
-    },
-    {,
+      },
       "domain": "$domain"
-     }
+    }
   ],
   "outbounds": [
     {
@@ -278,13 +276,6 @@ cat > /etc/xray/config.json << END
         "outboundTag": "blocked"
       },
       {
-        "inboundTag": [
-          "api"
-        ],
-        "outboundTag": "api",
-        "type": "field"
-      },
-      {
         "type": "field",
         "outboundTag": "blocked",
         "protocol": [
@@ -292,25 +283,6 @@ cat > /etc/xray/config.json << END
         ]
       }
     ]
-  },
-  "stats": {},
-  "api": {
-    "services": [
-      "StatsService"
-    ],
-    "tag": "api"
-  },
-  "policy": {
-    "levels": {
-      "0": {
-        "statsUserDownlink": true,
-        "statsUserUplink": true
-      }
-    },
-    "system": {
-      "statsInboundUplink": true,
-      "statsInboundDownlink": true
-    }
   }
 }
 END
