@@ -1,9 +1,10 @@
 #!/bin/bash
 WKT=$(curl -s ipinfo.io/timezone )
 clear
-echo -e " SEDANG PROSES OM HARAP BERSABAR"
+figlet -f small SEDANG PROSES OM HARAP BERSABAR | lolcat
 sleep 2
 figlet -f small JAGOANNEON AUTOSCRIPTSSH | lolcat
+sleep 1
 echo -e ""
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━ Menu ━━━━━━━━━━━━━━━━━━━━" | lolcat
 echo -e "* menu              : Menampilkan Daftar Perintah" | lolcat
