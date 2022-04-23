@@ -135,21 +135,14 @@ echo "echo Ketik menu Untuk Menampilkan Daftar Perintah..." >> .profile
 
 
 # install webserver
-apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
+apt -y install nginx
+cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-curl https://raw.githubusercontent.com/jagoanneon01/njajal/main/nginx.conf > /etc/nginx/nginx.conf
-curl https://raw.githubusercontent.com/jagoanneon01/njajal/main/vps.conf > /etc/nginx/conf.d/vps.conf
-sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/fpm/pool.d/www.conf
-useradd -m vps;
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/jagoanneon01/njajal/main/nginx.conf"
 mkdir -p /home/vps/public_html
-echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
-chown -R www-data:www-data /home/vps/public_html
-chmod -R g+rw /home/vps/public_html
-cd /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://https://raw.githubusercontent.com/jagoanneon01/njajal/main/index.html1"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/jagoanneon01/njajal/main/vps.conf"
 /etc/init.d/nginx restart
-cd
 
 # install badvpn
 cd
