@@ -173,7 +173,7 @@ cat > /etc/xray/config.json << END
         "clients": [
           {
             "id": "${uuid2}"
-#vmessgrpc
+#vmess-grpc
           }
          ],
          "decryption": none"
@@ -294,7 +294,7 @@ cat > /etc/xray/config.json << END
         "clients": [
           {
             "id": "${uuid5}"
-#vlessgrpc
+#vless-grpc
           }
          ],
          "decryption": none"
@@ -426,7 +426,7 @@ cat > /etc/xray/config.json << END
         "clients": [
           {
             "id": "${uuid8}"
-#trojangrpc
+#trojan-grpc
           }
         ],
         "fallbacks": [
