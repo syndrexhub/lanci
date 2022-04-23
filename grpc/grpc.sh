@@ -26,6 +26,8 @@ xraycore_link="https://github.com/XTLS/Xray-core/releases/download/v$latest_vers
 
 # 
 uuid=$(cat /proc/sys/kernel/random/uuid)
+uuid1=$(cat /proc/sys/kernel/random/uuid)
+uuid2=$(cat /proc/sys/kernel/random/uuid)
 
 # / / Make Main Directory
 mkdir -p /usr/bin/xray
@@ -172,7 +174,7 @@ cat > /etc/xray/vlessgrpc.json << END
             "settings": {
                 "clients": [
                     {
-                        "id": "${uuid}"
+                        "id": "${uuid1}"
 #vlessgrpc
                     }
                 ],
@@ -285,13 +287,11 @@ cat > /etc/xray/trojangrpc.json << END
             "settings": {
                 "clients": [
                     {
-                        "id": "${uuid}"
+                        "id": "${uuid2}"
 #trojangrpc
                     }
                 ],
-                "fallbacks": [
-              {
-                "dest": 80
+                "decryption": "none"
             },
             "streamSettings": {
                 "network": "gun",
@@ -404,7 +404,7 @@ EOF
 
 cat > /etc/systemd/system/vless-grpc.service << EOF
 [Unit]
-Description=XRay VMess GRPC Service
+Description=XRay VLess GRPC Service
 Documentation=https://speedtest.net https://github.com/XTLS/Xray-core
 After=network.target nss-lookup.target
 
