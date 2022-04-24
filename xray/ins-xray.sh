@@ -239,6 +239,34 @@ cat > /etc/xray/config.json << END
           "http",
           "tls"
         ]
+      }
+    },
+    {
+      "port": 4443,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "${uuid3}"
+#xray-vmess-tcp
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "tls",
+        "tlsSettings": {
+        "serverName": "example.com"
+      },
+        "tcpSettings": {
+          "header": {
+          "type": "http",
+          "request": {
+            "path": [
+              "/Ronggolawe"
+            },
+         ]
       },
       "domain": "$domain"
     }
