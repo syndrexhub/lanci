@@ -79,6 +79,7 @@ uuid4=$(cat /proc/sys/kernel/random/uuid)
 uuid5=$(cat /proc/sys/kernel/random/uuid)
 uuid6=$(cat /proc/sys/kernel/random/uuid)
 uuid7=$(cat /proc/sys/kernel/random/uuid)
+uuid8=$(cat /proc/sys/kernel/random/uuid)
 
 # // Certificate File
 path_crt="/etc/xray/xray.crt"
@@ -247,7 +248,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "id": "${uuid3}"
+            "id": "${uuid8}"
 #xray-vmess-tcp
           }
         ],
@@ -257,7 +258,7 @@ cat > /etc/xray/config.json << END
         "network": "tcp",
         "security": "tls",
         "tlsSettings": {
-        "serverName": "example.com"
+        "serverName": "$domain"
       },
         "tcpSettings": {
           "header": {
