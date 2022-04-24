@@ -250,25 +250,39 @@ cat > /etc/xray/config.json << END
           {
             "id": "${uuid8}"
 #xray-vmess-tcp
-          }
-        ],
-        "decryption": "none"
+}
+        ]
       },
       "streamSettings": {
-        "network": "tcp",
+        "network": "ws",
         "security": "tls",
         "tlsSettings": {
-        "serverName": "$domain"
+          "certificates": [
+            {
+              "certificateFile": "${path_crt}",
+              "keyFile": "${path_key}"
+            }
+          ]
+        },
+        "tcpSettings": {},
+        "kcpSettings": {},
+        "httpSettings": {},
+        "wsSettings": {
+          "path": "/Ronggolawe",
+          "headers": {
+            "Host": ""
+          }
+        },
+        "quicSettings": {}
       },
-        "tcpSettings": {
-          "header": {
-          "type": "http",
-          "request": {
-            "path": [
-              "/Ronggolawe"
-            },
-         ]
-      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
+    },
       "domain": "$domain"
     }
   ],
