@@ -51,7 +51,7 @@ sed -i '/#xray-trojan-wstls$/a\#&# '"$user $exp"'\
 sed -i '/#xray-trojan-wsnone$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojan.json
 sed -i '/#xray-trojan$/a\#&# '"$user $exp"'\
-},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojan.json
+},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#trojangrpc$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojangrpc.json
 systemctl restart xray.service
