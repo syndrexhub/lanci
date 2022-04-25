@@ -195,7 +195,7 @@ RUN=yes
 # systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
 
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:2443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
 
 END
 
@@ -249,7 +249,7 @@ connect = 127.0.0.1:109
 
 [openssh]
 accept = 777
-connect = 127.0.0.1:2443
+connect = 127.0.0.1:443
 
 [openvpn]
 accept = 990
@@ -327,7 +327,7 @@ wget -O trial-vmess "https://raw.githubusercontent.com/jagoanneon01/njajal/main/
 wget -O trial-vless "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-vless.sh"
 wget -O trial-trojan "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-trojan.sh"
 wget -O trial-trojango "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-trojango.sh"
-#wget -O trial-grpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-grpc.sh"
+wget -O trial-grpc "https://raw.githubusercontent.com/jagoanneon01/njajal/main/trial/trial-grpc.sh"
 wget -O speedtest "https://raw.githubusercontent.com/jagoanneon01/njajal/main/speedtest_cli.py"
 wget -O restart "https://raw.githubusercontent.com/jagoanneon01/njajal/main/restart.sh"
 wget -O autokill "https://raw.githubusercontent.com/jagoanneon01/njajal/main/autokill.sh"
@@ -384,8 +384,8 @@ chmod +x trial-trojan
 sed -i -e 's/\r$//' trial-trojan
 chmod +x trial-trojango
 sed -i -e 's/\r$//' trial-trojango
-#chmod +x trial-grpcc
-#sed -i -e 's/\r$//' trial-grpcc
+chmod +x trial-grpcc
+sed -i -e 's/\r$//' trial-grpcc
 chmod +x speedtest
 chmod +x info
 chmod +x about
