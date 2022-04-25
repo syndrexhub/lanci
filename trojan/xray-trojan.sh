@@ -242,3 +242,21 @@ cat > /etc/xray/trojan.json << END
   }
 }
 END
+
+# // Enable & Start Service
+# Accept port Trojan 
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2053 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2053 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2080 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2080 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2087 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2087 -j ACCEPT
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+netfilter-persistent save
+netfilter-persistent reload
+systemctl daemon-reload
+systemctl stop trojan.service
+systemctl start trojan.service
+systemctl enable trojan.service
+systemctl restart trojan.service
