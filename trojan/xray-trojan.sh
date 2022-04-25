@@ -243,6 +243,25 @@ cat > /etc/xray/trojan.json << END
 }
 END
 
+# / / Installation Xray Service
+cat > /etc/systemd/system/trojan.service << END
+[Unit]
+Description=Trojan Service By JAGOANNEON
+Documentation=http://jagoanneon-premium.xyz
+After=network.target nss-lookup.target
+[Service]
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/local/bin/xray -config /etc/xray/trojan.json
+Restart=on-failure
+RestartPreventExitStatus=23
+[Install]
+WantedBy=multi-user.target
+END
+
+
 # // Enable & Start Service
 # Accept port Trojan 
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2053 -j ACCEPT
