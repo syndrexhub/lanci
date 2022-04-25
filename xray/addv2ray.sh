@@ -56,7 +56,7 @@ sed -i '/#vmess-grpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/vmessgrpc.json
 cat>/etc/xray/vmess-$user-tls.json<<EOF
       {
-      "v": "3",
+      "v": "2",
       "ps": "${user}",
       "add": "${domain}",
       "port": "${tls}",
@@ -71,7 +71,7 @@ cat>/etc/xray/vmess-$user-tls.json<<EOF
 EOF
 cat>/etc/xray/vmess-$user-nontls.json<<EOF
       {
-      "v": "3",
+      "v": "2",
       "ps": "${user}",
       "add": "${bug}",
       "port": "${nontls}",
@@ -86,7 +86,7 @@ cat>/etc/xray/vmess-$user-nontls.json<<EOF
 EOF
 cat >/etc/xray/$user-tls.json << EOF
       {
-      "v": "3",
+      "v": "2",
       "ps": "${user}",
       "add": "${domain}",
       "port": "8443",
@@ -126,7 +126,7 @@ echo -e "Mode        : Multi" | lolcat
 echo -e "SecurityGRPC: TLS" | lolcat
 echo -e "Type        : GRPC" | lolcat
 echo -e "Service Name: GunService" | lolcat
-echo -e "Bug         : ${bug} | lolcat
+echo -e "Bug         : ${bug}" | lolcat
 echo -e "Path        : /Ronggolawe" | lolcat
 echo -e "═══════════════════════" | lolcat
 echo -e "Link TLS    : " | lolcat
