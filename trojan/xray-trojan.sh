@@ -43,6 +43,10 @@ chmod +x /usr/local/bin/xray
 # Make Folder XRay
 mkdir -p /var/log/xray/
 
+# // Certificate File
+path_crt="/etc/xray/xray.crt"
+path_key="/etc/xray/xray.key"
+
 # Buat konfigurasi Trojan
 cat > /etc/xray/trojan.json << END
 {
@@ -58,7 +62,7 @@ cat > /etc/xray/trojan.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid4}"
+            "password": "${uuid}"
 #xray-trojan-wstls
           }
         ],
@@ -108,7 +112,7 @@ cat > /etc/xray/trojan.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid5}"
+            "password": "${uuid1}"
 #xray-trojan-wsnone
           }
         ],
@@ -147,7 +151,7 @@ cat > /etc/xray/trojan.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid5}"
+            "password": "${uuid2}"
 #xray-trojan-go
           }
         ],
