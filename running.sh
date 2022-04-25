@@ -72,7 +72,7 @@ vless_nontls_v2ray_status=$(systemctl status xray | grep Active | awk '{print $3
 #ssr_status=$(systemctl status ssrmu | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 trojan_server=$(systemctl status trojan | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 grpc_server=$(systemctl status vmess-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-grpcc_server=$(systemctl status vless-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+vlessmu_server=$(systemctl status vless-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 grpccc_server=$(systemctl status trojan-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 dropbear_status=$(/etc/init.d/dropbear status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 stunnel_service=$(/etc/init.d/stunnel4 status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
@@ -115,10 +115,10 @@ else
 fi
 
 # STATUS SERVICE Vless GRPC
-if [[ $$grpcc_server == "running" ]]; then 
-   status_grpcc=" ${GREEN}Running ${NC}( No Error )"
+if [[ $$vlessmu_server == "running" ]]; then 
+   status_vlessmu=" ${GREEN}Running ${NC}( No Error )"
 else
-   status_grpcc="${RED}  Not Running ${NC}  ( Error )"
+   status_vlessmu="${RED}  Not Running ${NC}  ( Error )"
 fi
 
 # STATUS SERVICE OPENVPN
@@ -373,7 +373,7 @@ echo -e "║ XRAYS Vless None TLS    :$status_nontls_vless"
 echo -e "║ XRAYS Trojan            :$status_virus_trojan"
 echo -e "║ Trojan GO               :$status_trgo"
 echo -e "║ XRAYS Vmess GRPC        :$status_grpc"
-echo -e "║ XRAYS Vless GRPC        :$status_grpcc"
+echo -e "║ XRAYS Vless GRPC        :$status_vlessmu"
 echo -e "║ XRAYS Trojan GRPC       :$status_grpccc"
 echo -e "║ Websocket TLS           :$swstls"
 echo -e "║ Websocket None TLS      :$swsdrop"
