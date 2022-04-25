@@ -43,6 +43,8 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/startcomand.sh &
 wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/xray/ins-xray.sh && chmod +x ins-xray.sh && sed -i -e 's/\r$//' ins-xray.sh && screen -S xray ./ins-xray.sh
 # Trojango
 #wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/ins-trojango.sh && chmod +x ins-trojango.sh && sed -i -e 's/\r$//' ins-trojango.sh && ./ins-trojango.sh
+#install trojan
+wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/xray/ins-trojan.sh && chmod +x ins-trojan.sh && sed -i -e 's/\r$//' ins-trojan.sh && screen -S trojan ./ins-trojan.sh
 # install xray grpc
 wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/grpc.sh && chmod +x grpc.sh && sed -i -e 's/\r$//' grpc.sh && screen -S grpc ./grpc.sh
 #
@@ -53,6 +55,7 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/websocket/edu.sh
 rm -f /root/startcomand.sh
 rm -f /root/ins-xray.sh
 #rm -f /root/ins-trojango.sh
+rm -f /root/trojan.sh
 rm -f /root/grpc.sh
 rm -f /root/edu.sh
 history -c
