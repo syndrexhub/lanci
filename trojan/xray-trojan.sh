@@ -51,7 +51,7 @@ path_key="/etc/xray/xray.key"
 cat > /etc/xray/trojan.json << END
 {
   "log": {
-    "access": "/var/log/xray/access2.log",
+    "access": "/var/log/xray/access3.log",
     "error": "/var/log/xray/error.log",
     "loglevel": "info"
   },
@@ -145,56 +145,6 @@ cat > /etc/xray/trojan.json << END
         ]
       }
     },
-    {  
-      "port": 2087,
-      "protocol": "trojan-go",
-      "settings": {
-        "clients": [
-          {
-            "password": "${uuid2}"
-#xray-trojan-go
-          }
-        ],
-        "fallbacks": [
-          {
-            "dest": 80
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "${path_crt}",
-              "keyFile": "${path_key}"
-            }
-          ],
-          "alpn": [
-            "http/1.1"
-          ]
-        },
-        "tcpSettings": {},
-        "kcpSettings": {},
-        "httpSettings": {},
-        "wsSettings": {
-          "path": "/Ronggolawe",
-          "headers": {
-            "Host": ""
-          }
-        },
-        "quicSettings": {}
-      },
-      "domain": "$domain",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      }
-    },
       "domain": "$domain"
     }
   ],
@@ -268,8 +218,6 @@ iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2053 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2053 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2080 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2080 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2087 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2087 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
