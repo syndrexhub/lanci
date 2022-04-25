@@ -279,3 +279,6 @@ systemctl stop trojan.service
 systemctl start trojan.service
 systemctl enable trojan.service
 systemctl restart trojan.service
+
+cd
+cp /root/domain /etc/xray
