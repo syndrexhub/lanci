@@ -53,7 +53,7 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/websocket/edu.sh
 # 
 
 rm -f /root/startcomand.sh
-rm -f /root/ins-xray.sh
+#rm -f /root/ins-xray.sh
 rm -f /root/ins-trojango.sh
 rm -f /root/xray-trojan.sh
 rm -f /root/grpc.sh
@@ -79,11 +79,8 @@ echo "   - XRAYS Vmess None TLS    : 80"  | tee -a log-install.txt
 echo "   - XRAYS Vless TLS         : 443"  | tee -a log-install.txt
 echo "   - XRAYS Vless None TLS    : 80"  | tee -a log-install.txt
 echo "   - XRAYS Trojan            : 2083"  | tee -a log-install.txt
-echo "   - XRAYS TrOjan WS-TLS     : 2053"  | tee -a log-install.txt
-echo "   - XRAYS TrojAn None-TLS   : 2080"  | tee -a log-install.txt
 echo "   - XRAYS VMESS GRPC        : 8443"  | tee -a log-install.txt
-echo "   - XRAYS VLESS GRPC        : 1443"  | tee -a log-install.txt
-echo "   - XRAYS TROJAN GRPC       : 3443"  | tee -a log-install.txt
+echo "   - XRAYS VLESS GRPC        : 2053"  | tee -a log-install.txt
 echo "   - CloudFront Websocket    : "  | tee -a log-install.txt
 echo "   - Websocket TLS           : 2443"  | tee -a log-install.txt
 echo "   - Websocket None TLS      : 2082"  | tee -a log-install.txt
