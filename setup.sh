@@ -44,7 +44,7 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/xray/ins-xray.sh
 # Trojango
 #wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/ins-trojango.sh && chmod +x ins-trojango.sh && sed -i -e 's/\r$//' ins-trojango.sh && ./ins-trojango.sh
 #install trojan
-wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/xray/ins-trojan.sh && chmod +x ins-trojan.sh && sed -i -e 's/\r$//' ins-trojan.sh && screen -S trojan ./ins-trojan.sh
+wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojan/ins-trojan.sh && chmod +x ins-trojan.sh && sed -i -e 's/\r$//' ins-trojan.sh && screen -S trojan ./ins-trojan.sh
 # install xray grpc
 wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/grpc.sh && chmod +x grpc.sh && sed -i -e 's/\r$//' grpc.sh && screen -S grpc ./grpc.sh
 #
