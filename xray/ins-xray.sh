@@ -76,10 +76,6 @@ uuid1=$(cat /proc/sys/kernel/random/uuid)
 uuid2=$(cat /proc/sys/kernel/random/uuid)
 uuid3=$(cat /proc/sys/kernel/random/uuid)
 uuid4=$(cat /proc/sys/kernel/random/uuid)
-uuid5=$(cat /proc/sys/kernel/random/uuid)
-uuid6=$(cat /proc/sys/kernel/random/uuid)
-uuid7=$(cat /proc/sys/kernel/random/uuid)
-uuid8=$(cat /proc/sys/kernel/random/uuid)
 
 # // Certificate File
 path_crt="/etc/xray/xray.crt"
@@ -248,7 +244,7 @@ cat > /etc/xray/config.json << END
       "settings": {
         "clients": [
           {
-            "password": "${uuid6}"
+            "password": "${uuid4}"
 #xray-trojan
           }
         ],
