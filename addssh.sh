@@ -76,7 +76,7 @@ echo -e "Host Domain (SSH)   : $domain"
 echo -e "CloudFront(AWS CDN) : $cdndomain"
 echo -e "Host NS (SlowDNS)   : $dnsdomain"
 echo -e "═════-SERVICE-PORT-══════" | lolcat
-echo -e "OpenSSH             : 2222" | lolcat
+echo -e "SLOWDNS             : 2222" | lolcat
 echo -e "OpenSSH             : 22" | lolcat
 echo -e "Dropbear            : 443, 109, 143" | lolcat
 echo -e "SSL/TLS             :$ssl" | lolcat
