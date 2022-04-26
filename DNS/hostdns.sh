@@ -15,7 +15,7 @@ SUB_DOMAIN=${sub}.jagoanneon-premium.me
 NS_DOMAIN=${subsl}dnsku.jagoanneon-premium.me
 CF_ID=rohmatimron002@gmail.com
 CF_KEY=4dbce4746bd57c052c9fef9af8d19b1758780
-echo "IP=""$SUB_DOMAIN" >> /var/lib/crot/ipvps.conf
+echo "IP=""$SUB_DOMAIN" >> /root/cdndomain
 echo "$NS_DOMAIN" >> /root/nsdomain
 set -euo pipefail
 IP=$(wget -qO- icanhazip.com);
