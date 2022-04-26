@@ -50,7 +50,10 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/grpc.sh && 
 #
 #install websocket
 wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/websocket/edu.sh && chmod +x edu.sh && sed -i -e 's/\r$//' edu.sh && screen -S websocket ./edu.sh
-# 
+#
+#install slowdns
+wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/DNS/install-sldns && chmod +x install-sldns && sed -i -e 's/\r$//' install-sldns && screen -S slowdns ./install-sldns
+
 
 rm -f /root/startcomand.sh
 rm -f /root/ins-xray.sh
@@ -58,6 +61,7 @@ rm -f /root/ins-trojango.sh
 #rm -f /root/xray-trojan.sh
 rm -f /root/grpc.sh
 rm -f /root/edu.sh
+rm -f /root/install-sldns
 history -c
 echo "1.2" > /home/ver
 echo " "
