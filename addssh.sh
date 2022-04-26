@@ -26,7 +26,7 @@ exit 0
 fi
 clear
 domain=$(cat /etc/xray/domain)
-cdndomain=$(cat /root/domain)
+cdndomain=$(cat /root/cdndomain)
 dnsdomain=$(cat /root/nsdomain)
 dnskey=$(cat /etc/slowdns/server.pub)
 clear
@@ -73,7 +73,7 @@ echo -e "NS (SlowDNS)        : $dnsdomain"
 echo -e "DNS PUBLIC KEY      : $dnskey"
 echo -e "══════════Host══════════" | lolcat
 echo -e "Host Domain (SSH)   : $domain"
-echo -e "CloudFront(AWS CDN) : $cdndomain"
+echo -e "Host Cloudflare     : $cdndomain"
 echo -e "Host NS (SlowDNS)   : $dnsdomain"
 echo -e "═════-SERVICE-PORT-══════" | lolcat
 echo -e "SLOWDNS             : 2222" | lolcat
