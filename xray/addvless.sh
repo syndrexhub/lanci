@@ -56,7 +56,7 @@ sed -i '/#vlessgrpc$/a\#### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/vlessgrpc.json
 xrayvless1="vless://${uuid}@${domain}:$tls?path=/Ronggolawe&security=tls&encryption=none&type=ws#${user}"
 xrayvless2="vless://${uuid}@${domain}:$nontls?path=/Ronggolawe&encryption=none&type=ws#${user}"
-xrayvless3="vless://${uuid}@${domain}:1443?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
+xrayvless3="vless://${uuid}@${domain}:2080?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 systemctl restart xray.service
 service cron restart
 clear
@@ -69,7 +69,7 @@ echo -e "IP/Host     : ${MYIP}" | lolcat
 echo -e "Address     : ${domain}" | lolcat
 echo -e "Port TLS    : $tls" | lolcat
 echo -e "Port No TLS : $nontls" | lolcat
-echo -e "Port GRPC   : 1443" | lolcat
+echo -e "Port GRPC   : 2080" | lolcat
 echo -e "User ID     : ${uuid}" | lolcat
 echo -e "Encryption  : none" | lolcat
 echo -e "Network     : WS & Grpc" | lolcat
