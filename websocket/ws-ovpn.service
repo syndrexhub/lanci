@@ -1,6 +1,6 @@
 [Unit]
-Description=Python Proxy Mod By geovpn
-Documentation=https://t.me/geovpn
+Description=Python Proxy By JAGOANNEON
+Documentation=http://jagoanneon-premium.xyz
 After=network.target nss-lookup.target
 
 [Service]
