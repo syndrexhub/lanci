@@ -52,7 +52,7 @@ sed -i '/#xray-vmess-tls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#xray-vmess-nontls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#vmess-grpc$/a\### '"$user $exp"'\
+sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"32"',"email": "'""$user""'"' /etc/xray/vmessgrpc.json
 cat>/etc/xray/vmess-$user-tls.json<<EOF
       {
@@ -89,7 +89,7 @@ cat >/etc/xray/$user-tls.json << EOF
       "v": "0",
       "ps": "${user}",
       "add": "${domain}",
-      "port": "8443",
+      "port": "80",
       "id": "${uuid}",
       "aid": "0",
       "net": "grpc",
@@ -117,7 +117,7 @@ echo -e "IP/Host     : ${MYIP}" | lolcat
 echo -e "Address     : ${domain}" | lolcat
 echo -e "Port TLS    : ${tls}" | lolcat
 echo -e "Port No TLS : ${nontls}" | lolcat
-echo -e "Port GRPC   : 8443" | lolcat
+echo -e "Port GRPC   : 80" | lolcat
 echo -e "User ID     : ${uuid}" | lolcat
 echo -e "Alter ID    : 0" | lolcat
 echo -e "Security WS : auto" | lolcat
