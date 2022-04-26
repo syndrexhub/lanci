@@ -60,11 +60,7 @@ echo -e "Remarks     : ${user}" | lolcat
 echo -e "IP/Host     : ${MYIP}" | lolcat
 echo -e "Address     : ${domain}" | lolcat
 echo -e "Port TCP    : ${tr}" | lolcat
-echo -e "Port GRPC   : 8880" | lolcat
-echo -e "Network     : TCP & Grpc" | lolcat
-echo -e "Mode        : Multi" | lolcat
-echo -e "SecurityGRPC: TLS" | lolcat
-echo -e "Type        : GRPC" | lolcat
+echo -e "Network     : TCP" | lolcat
 echo -e "Key         : ${user}" | lolcat
 echo -e "Bug         : ${bug}" | lolcat
 echo -e "═══════════════════════" | lolcat
