@@ -48,8 +48,6 @@ hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#xray-trojan$/a\#&# '"$user $exp"'\
 },{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/config.json
-sed -i '/#trojangrpc$/a\#&# '"$user $exp"'\
-},{"password": "'""$user""'","email": "'""$user""'"' /etc/xray/trojangrpc.json
 systemctl restart xray.service
 trojanlink="trojan://${user}@${domain}:${tr}/${bug}"
 service cron restart
@@ -72,9 +70,6 @@ echo -e "Bug         : ${bug}" | lolcat
 echo -e "═══════════════════════" | lolcat
 echo -e "Link TR  : " | lolcat
 echo -e ">>>> ${trojanlink}" | lolcat
-echo -e "════════════════" | lolcat
-echo -e "Link TR GRPC  : " | lolcat
-echo -e ">>>> ${link3}" | lolcat
 echo -e "═══════════════════════" | lolcat
 echo -e "Created     : $hariini" | lolcat
 echo -e "Expired     : $exp" | lolcat
