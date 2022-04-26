@@ -45,8 +45,6 @@ sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/vmessgrpc.json
 sed -i '/#vlessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/vlessgrpc.json
-sed -i '/#trojangrpc$/a\### '"$user $exp"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/trojangrpc.json
 cat > /etc/xray/$user-tls.json << EOF
       {
       "v": "0",
@@ -68,7 +66,6 @@ vmesslink1="vmess://${uuid}@${domain}:${tls}/?type=grpc&encryption=auto&serviceN
 vmesslink2="vmess://${uuid}@${domain}:${tls}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 vlesslink1="vless://${uuid}@${domain}:${vl}?mode=gun&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 vlesslink2="vless://${uuid}@${domain}:${tr}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
-trojanlink="trojan://${uuid}@${domain}:${tr}?mode=multi&security=tls&encryption=none&type=grpc&serviceName=GunService&sni=${bug}#$user"
 systemctl restart vmess-grpc.service
 systemctl restart vless-grpc.service
 service cron restart
@@ -104,11 +101,6 @@ echo -e "${vlesslink1}" | lolcat
 echo -e "=•=•=•=•=•=•=•=•=•=•=" | lolcat
 echo -e "****MULTI MODE TCP& Websocket****" | lolcat
 echo -e "${vlesslink2}" | lolcat
-echo -e "══════════════════════" | lolcat
-echo -e "Link Trojan GRPC  : " | lolcat
-echo -e "=•=•=•=•=•=•=•=•=•=•=" | lolcat
-echo -e "****MULTI MODE TCP& Websocket****" | lolcat
-echo -e "${trojanlink}" | lolcat
 echo -e "══════════════════════" | lolcat
 echo -e "Created : $hariini" | lolcat
 echo -e "Expired : $exp" | lolcat
