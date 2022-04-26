@@ -65,6 +65,9 @@ sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 
 # Buat config client TCP 1194
 cat > /etc/openvpn/tcp.ovpn <<-END
+############## WELCOME TO ###############
+##########   JAGOANNEON-VPN  ###########
+####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto tcp
@@ -83,6 +86,9 @@ sed -i $MYIP2 /etc/openvpn/tcp.ovpn;
 
 # Buat config client UDP 2200
 cat > /etc/openvpn/udp.ovpn <<-END
+############## WELCOME TO ###############
+##########   JAGOANNEON-VPN  ###########
+####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto udp
@@ -101,6 +107,9 @@ sed -i $MYIP2 /etc/openvpn/udp.ovpn;
 
 # Buat config client SSL
 cat > /etc/openvpn/ssl.ovpn <<-END
+############## WELCOME TO ###############
+##########   JAGOANNEON-VPN  ###########
+####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto tcp
