@@ -70,7 +70,7 @@ nontls_v2ray_status=$(systemctl status xray | grep Active | awk '{print $3}' | c
 vless_tls_v2ray_status=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 vless_nontls_v2ray_status=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 #ssr_status=$(systemctl status ssrmu | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-trojan_server=$(systemctl status trojan | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+trojan_server=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 grpc_server=$(systemctl status vmess-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 vlessmu_server=$(systemctl status vless-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 grpccc_server=$(systemctl status trojan-grpc | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
@@ -92,6 +92,8 @@ wsdrop=$(systemctl status ws-nontls | grep Active | awk '{print $3}' | cut -d "(
 wsovpn=$(systemctl status ws-ovpn | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 #wsopen=$(systemctl status ws-openssh | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 osslh=$(systemctl status sslh | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+server_dns=$(systemctl status server_sldns | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+client_dns=$(systemctl status client_sldns | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 #ohp=$(systemctl status dropbear-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 #ohq=$(systemctl status openvpn-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 #ohr=$(systemctl status ssh-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
@@ -191,18 +193,18 @@ else
   status_nontls_vless="${RED}  Not Running ${NC}  ( Error )${NC}"
 fi
 
-# Trojan gRPC
-if [[ $grpccc_server == "running" ]] ; then
-  status_grpccc=" ${GREEN}Running${NC} ( No Error )${NC}"
+# Server Slowdns
+if [[ $server_dns == "running" ]] ; then
+  status_dns=" ${GREEN}Running${NC} ( No Error )${NC}"
 else
-  status_grpccc="${RED}  Not Running ${NC}  ( Error )${NC}"
+  status_dns="${RED}  Not Running ${NC}  ( Error )${NC}"
 fi
 
-# SODOSOK
-if [[ $status_text == "active" ]] ; then
-  status_sodosok=" ${GREEN}Running${NC} ( No Error )${NC}"
+# Client SLOWDNS
+if [[ $client_dns == "active" ]] ; then
+  status_clientmu=" ${GREEN}Running${NC} ( No Error )${NC}"
 else
-  status_sodosok="${RED}  Not Running ${NC}  ( Error )${NC}"
+  status_clientmu="${RED}  Not Running ${NC}  ( Error )${NC}"
 fi
 
 # STATUS SERVICE TROJAN
@@ -374,7 +376,8 @@ echo -e "║ XRAYS Trojan            :$status_virus_trojan"
 echo -e "║ Trojan GO               :$status_trgo"
 echo -e "║ XRAYS Vmess GRPC        :$status_grpc"
 echo -e "║ XRAYS Vless GRPC        :$status_vlessmu"
-echo -e "║ XRAYS Trojan GRPC       :$status_grpccc"
+echo -e "║ SERVER SLOWDNS          :$status_dns"
+echo -e "║ CLIENT SLOWDNS          :$status_clientmu"
 echo -e "║ Websocket TLS           :$swstls"
 echo -e "║ Websocket None TLS      :$swsdrop"
 echo -e "║ Websocket Ovpn          :$swsovpn"
