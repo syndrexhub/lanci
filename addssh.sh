@@ -57,7 +57,7 @@ echo -e "Username            : $Login" | lolcat
 echo -e "Password            : $Pass" | lolcat
 echo -e "═══════════════════════" | lolcat
 echo -e "OpenSSH             : 22" | lolcat
-echo -e "Dropbear            : 2443, 109, 143" | lolcat
+echo -e "Dropbear            : 443, 109, 143" | lolcat
 echo -e "SSL/TLS             :$ssl" | lolcat
 echo -e "Proxy Squid         :$sqd" | lolcat
 echo -e "═══════════════════════" | lolcat
