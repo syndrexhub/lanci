@@ -44,7 +44,7 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/xray/ins-xray.sh
 # Trojango
 wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojango/ins-trojango.sh && chmod +x ins-trojango.sh && sed -i -e 's/\r$//' ins-trojango.sh && ./ins-trojango.sh
 #install trojan
-wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojan/xray-trojan.sh && chmod +x xray-trojan.sh && sed -i -e 's/\r$//' xray-trojan.sh && screen -S trojan ./xray-trojan.sh
+#wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/trojan/xray-trojan.sh && chmod +x xray-trojan.sh && sed -i -e 's/\r$//' xray-trojan.sh && screen -S trojan ./xray-trojan.sh
 # install xray grpc
 wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/grpc.sh && chmod +x grpc.sh && sed -i -e 's/\r$//' grpc.sh && screen -S grpc ./grpc.sh
 #
@@ -53,9 +53,9 @@ wget https://raw.githubusercontent.com/jagoanneon01/njajal/main/websocket/edu.sh
 # 
 
 rm -f /root/startcomand.sh
-#rm -f /root/ins-xray.sh
+rm -f /root/ins-xray.sh
 rm -f /root/ins-trojango.sh
-rm -f /root/xray-trojan.sh
+#rm -f /root/xray-trojan.sh
 rm -f /root/grpc.sh
 rm -f /root/edu.sh
 history -c
@@ -69,23 +69,24 @@ echo ""  | tee -a log-install.txt
 echo "   >>> Service & Port"  | tee -a log-install.txt
 echo "   - OpenSSH                 : 22, 2253"  | tee -a log-install.txt
 echo "   - OpenVPN                 : TCP 1194, UDP 2200, SSL 990"  | tee -a log-install.txt
-echo "   - Stunnel4                : 2443, 445"  | tee -a log-install.txt
-echo "   - Dropbear                : 2443, 109, 143"  | tee -a log-install.txt
+echo "   - Stunnel4                : 443, 445"  | tee -a log-install.txt
+echo "   - Dropbear                : 443, 109, 143"  | tee -a log-install.txt
 echo "   - Squid Proxy             : 3128, 8080"  | tee -a log-install.txt
 echo "   - Badvpn                  : 7100, 7200, 7300"  | tee -a log-install.txt
 echo "   - Nginx                   : 89"  | tee -a log-install.txt
-echo "   - XRAYS Vmess TLS         : 443"  | tee -a log-install.txt
-echo "   - XRAYS Vmess None TLS    : 80"  | tee -a log-install.txt
-echo "   - XRAYS Vless TLS         : 443"  | tee -a log-install.txt
-echo "   - XRAYS Vless None TLS    : 80"  | tee -a log-install.txt
+echo "   - XRAYS Vmess TLS         : 8443"  | tee -a log-install.txt
+echo "   - XRAYS Vmess None TLS    : 8880"  | tee -a log-install.txt
+echo "   - XRAYS Vless TLS         : 8443"  | tee -a log-install.txt
+echo "   - XRAYS Vless None TLS    : 8880"  | tee -a log-install.txt
 echo "   - XRAYS Trojan            : 2083"  | tee -a log-install.txt
-echo "   - XRAYS VMESS GRPC        : 8443"  | tee -a log-install.txt
-echo "   - XRAYS VLESS GRPC        : 2053"  | tee -a log-install.txt
+echo "   - XRAYS VMESS GRPC        : 80"  | tee -a log-install.txt
+echo "   - XRAYS VLESS GRPC        : 2080"  | tee -a log-install.txt
 echo "   - CloudFront Websocket    : "  | tee -a log-install.txt
-echo "   - Websocket TLS           : 2443"  | tee -a log-install.txt
+echo "   - Websocket TLS           : 443"  | tee -a log-install.txt
 echo "   - Websocket None TLS      : 2082"  | tee -a log-install.txt
 echo "   - Websocket Ovpn          : 2086"  | tee -a log-install.txt
 echo "   - TrojanGo                : 2087"  | tee -a log-install.txt
+echo "   - SLOWDNS                 : 2222"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
 echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a log-install.txt
