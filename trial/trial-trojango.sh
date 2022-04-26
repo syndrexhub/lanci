@@ -60,7 +60,7 @@ echo -e "Address    : ${domain}"
 echo -e "Port       : ${trgo}"
 echo -e "Key        : ${user}"
 echo -e "Encryption : none"
-echo -e "Bug.       : ${bug}
+echo -e "Bug        : ${bug}" | lolcat
 echo -e "Path       : /trojango"
 echo -e "Created     : $now" | lolcat
 echo -e "Active During To : $ktf Hours" | lolcat
