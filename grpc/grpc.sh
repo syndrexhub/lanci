@@ -305,8 +305,8 @@ RestartPreventExitStatus=23
 WantedBy=multi-user.target
 EOF
 
-iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
-iptables -I INPUT -m state --state NEW -m udp -p udp --dport 80 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8880 -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8880 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 2080 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport 2080 -j ACCEPT
 iptables-save > /etc/iptables.up.rules
@@ -318,3 +318,17 @@ systemctl enable vmess-grpc
 systemctl restart vmess-grpc
 systemctl enable vless-grpc
 systemctl restart vless-grpc
+
+cd /usr/bin
+
+wget -O addgrcp "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/addgrpc.sh"
+wget -O delgrcp "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/delgrpc.sh"
+wget -O cekgrcp "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/cekgrpc.sh"
+wget -O renewgrcp "https://raw.githubusercontent.com/jagoanneon01/njajal/main/grpc/renewgrpc.sh"
+
+chmod +x addgrpc
+chmod +x delgrpc
+chmod +x cekgrpc
+chmod +x renewgrcp
+
+cd /root
